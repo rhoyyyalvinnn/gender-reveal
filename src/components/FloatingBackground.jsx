@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion } from 'framer-motion'
 import {
   CloudIcon,
   StarIcon,
@@ -21,15 +21,10 @@ export default function FloatingBackground({
   layers = ['clouds'],
   gradient = 'from-soft-pink via-cream to-baby-blue',
 }) {
-  const { scrollYProgress } = useScroll()
-  // Gentle parallax: background drifts slower than scroll
-  const parallaxY = useTransform(scrollYProgress, [0, 1], ['0%', '15%'])
-
   return (
     <motion.div
       aria-hidden="true"
       className={`absolute inset-0 overflow-hidden bg-gradient-to-br ${gradient}`}
-      style={{ y: parallaxY }}
     >
       {layers.includes('clouds') && <CloudsLayer />}
       {layers.includes('stars') && <StarsLayer />}

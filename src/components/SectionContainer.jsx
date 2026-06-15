@@ -15,7 +15,7 @@ import { motion } from 'framer-motion'
  */
 export default function SectionContainer({ id, background, className = '', children }) {
   return (
-    <section id={id} className="snap-slide" aria-label={id}>
+    <section id={id} className="snap-slide relative" aria-label={id}>
       {background}
       <motion.div
         initial={{ opacity: 0, y: 60 }}

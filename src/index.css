@@ -79,6 +79,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Remove extra top padding for the very first slide to avoid visible whitespace */
+.snap-slide:first-child {
+  align-items: flex-start;
+}
+
 .snap-slide:first-child .section-content {
   padding-top: 0 !important;
 }
