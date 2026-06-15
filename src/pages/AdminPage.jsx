@@ -18,6 +18,12 @@ export default function AdminPage() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [search, setSearch] = useState('')
+  const [modalMessage, setModalMessage] = useState(null)
+  const openModal = (msg) => setModalMessage(msg)
+  const closeModal = () => setModalMessage(null)
+  const TRUNCATE_LENGTH = 40
+  const truncate = (text, n = TRUNCATE_LENGTH) =>
+    (text && text.length > n ? text.slice(0, n) + '...' : text)
 
   const loadData = async () => {
     setLoading(true)
@@ -140,7 +146,7 @@ export default function AdminPage() {
                   <Th>Email</Th>
                   <Th>Phone</Th>
                   <Th>Guests</Th>
-                  <Th>Status</Th>
+                  <Th className="whitespace-nowrap">Status</Th>
                   <Th>Message</Th>
                   <Th>Submitted</Th>
                 </tr>
@@ -154,13 +160,13 @@ export default function AdminPage() {
                     transition={{ delay: i * 0.02 }}
                     className="border-b border-cream last:border-0"
                   >
-                    <Td>{r.fullName}</Td>
+                    <Td className="whitespace-nowrap">{r.fullName}</Td>
                     <Td>{r.email}</Td>
                     <Td>{r.phoneNumber}</Td>
                     <Td>{r.guestCount ?? 0}</Td>
-                    <Td>
+                    <Td className="whitespace-nowrap">
                       <span
-                        className={`px-2 py-1 rounded-full text-xs font-semibold ${
+                        className={`inline-block whitespace-nowrap px-2 py-1 rounded-full text-xs font-semibold ${
                           r.attendance === 'Happily Attending'
                             ? 'bg-baby-blue/40 text-baby-blue-deep'
                             : 'bg-soft-pink/40 text-soft-pink-deep'
@@ -169,14 +175,49 @@ export default function AdminPage() {
                         {r.attendance}
                       </span>
                     </Td>
-                    <Td className="max-w-xs truncate" title={r.message}>
-                      {r.message || '—'}
+                    <Td className="max-w-[10rem]">
+                      {r.message ? (
+                        <button
+                          type="button"
+                          onClick={() => openModal(r.message)}
+                          className="text-left w-full truncate text-sm leading-tight hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-baby-blue rounded"
+                          aria-label={`View full message from ${r.fullName}`}
+                        >
+                          {truncate(r.message)}
+                        </button>
+                      ) : (
+                        '—'
+                      )}
                     </Td>
-                    <Td>{formatDate(r.submittedAt)}</Td>
+                    <Td className="whitespace-nowrap">{formatDate(r.submittedAt)}</Td>
                   </motion.tr>
                 ))}
               </tbody>
             </table>
+          </div>
+        )}
+
+        {/* Full message modal */}
+        {modalMessage && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true">
+            <div className="fixed inset-0 bg-black/40" onClick={closeModal} />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.2 }}
+              className="relative invite-card max-w-xl w-full p-6 shadow-2xl z-10"
+            >
+              <button
+                type="button"
+                onClick={closeModal}
+                className="absolute top-3 right-3 text-[#5B4B66]/50 hover:text-[#5B4B66] focus-visible:outline focus-visible:outline-2 focus-visible:outline-baby-blue rounded"
+                aria-label="Close message"
+              >
+                ✕
+              </button>
+              <h2 className="font-heading text-xl gradient-text font-bold mb-3">Message</h2>
+              <p className="whitespace-pre-wrap text-sm sm:text-base text-[#5B4B66]">{modalMessage}</p>
+            </motion.div>
           </div>
         )}
       </div>
@@ -193,8 +234,8 @@ function StatCard({ label, value, color }) {
   )
 }
 
-function Th({ children }) {
-  return <th className="px-4 py-3 font-heading whitespace-nowrap">{children}</th>
+function Th({ children, className = '' }) {
+  return <th className={`px-4 py-3 font-heading whitespace-nowrap ${className}`}>{children}</th>
 }
 
 function Td({ children, className = '', ...props }) {

@@ -102,3 +102,24 @@ textarea:focus-visible {
     scroll-behavior: auto !important;
   }
 }
+
+html {
+  scrollbar-color: #FF9EC4 #FFF8F0;
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #FF9EC4;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #FF7FB3;
+}
+::-webkit-scrollbar-track {
+  background-color: #FFF8F0;
+  border-radius: 10px;
+}
