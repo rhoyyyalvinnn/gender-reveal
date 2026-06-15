@@ -31,7 +31,7 @@ export default function GiftListSection() {
     <SectionContainer
       id="gift-list"
       background={
-        <FloatingBackground layers={['clouds', 'balloons', 'hearts']} gradient="from-soft-pink via-cream to-baby-blue" />
+        <FloatingBackground layers={['clouds', 'hearts']} gradient="from-soft-pink via-cream to-baby-blue" />
       }
       className="text-center flex flex-col items-center justify-center"
     >

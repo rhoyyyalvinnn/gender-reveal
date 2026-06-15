@@ -4,7 +4,7 @@
  * Each component accepts standard props like `className` and `style`.
  */
 
-export function CloudIcon({ className = '', style = {} }) {
+export function CloudIcon({ className = '', style = {}, color = '#FFFFFF' }) {
   return (
     <svg
       className={className}
@@ -14,9 +14,9 @@ export function CloudIcon({ className = '', style = {} }) {
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
     >
-      <ellipse cx="60" cy="65" rx="50" ry="30" fill="#FFFFFF" />
-      <ellipse cx="110" cy="55" rx="60" ry="38" fill="#FFFFFF" />
-      <ellipse cx="155" cy="68" rx="40" ry="26" fill="#FFFFFF" />
+      <ellipse cx="60" cy="65" rx="50" ry="30" fill={color} />
+      <ellipse cx="110" cy="55" rx="60" ry="38" fill={color} />
+      <ellipse cx="155" cy="68" rx="40" ry="26" fill={color} />
     </svg>
   )
 }

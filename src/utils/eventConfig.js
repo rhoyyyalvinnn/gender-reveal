@@ -13,8 +13,11 @@ export const eventConfig = {
   parents: {
     momName: 'Rachel',
     dadName: 'Dominique',
-    momPhoto: 'https://placehold.co/400x400/FFD6E8/5B4B66?text=Mom',
-    dadPhoto: 'https://placehold.co/400x400/A7D8FF/5B4B66?text=Dad',
+    gallery: [
+      '/images/parents-1.jpg',
+      '/images/parents-2.jpg',
+      '/images/parents-3.jpg',
+    ],
   },
 
   // ---- Gender Reveal ----

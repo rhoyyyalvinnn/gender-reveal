@@ -60,7 +60,7 @@ export default function RsvpSection() {
     <SectionContainer
       id="rsvp"
       background={
-        <FloatingBackground layers={['clouds', 'balloons', 'hearts']} gradient="from-soft-pink via-cream to-baby-blue" />
+        <FloatingBackground layers={['clouds', 'hearts']} gradient="from-soft-pink via-cream to-baby-blue" />
       }
       className="text-center"
     >

@@ -48,6 +48,10 @@ export default {
           '0%, 100%': { transform: 'rotate(-3deg)' },
           '50%': { transform: 'rotate(3deg)' },
         },
+        cloudShift: {
+          '0%, 49%': { color: '#60A5FA' },
+          '51%, 100%': { color: '#F472B6' },
+        },
       },
       animation: {
         floatY: 'floatY 6s ease-in-out infinite',
@@ -59,6 +63,8 @@ export default {
         heartFloat: 'heartFloat 8s ease-in infinite',
         bob: 'bob 4s ease-in-out infinite',
         wiggle: 'wiggle 2s ease-in-out infinite',
+        cloudShift: 'cloudShift 60s linear infinite',
+        cloudShiftSlow: 'cloudShift 90s linear infinite',
       },
     },
   },

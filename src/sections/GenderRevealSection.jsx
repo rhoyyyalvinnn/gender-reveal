@@ -39,7 +39,7 @@ export default function GenderRevealSection() {
     <SectionContainer
       id="gender-reveal"
       background={
-        <FloatingBackground layers={['stars', 'balloons']} gradient="from-baby-blue via-cream to-soft-pink" />
+        <FloatingBackground layers={['stars']} gradient="from-baby-blue via-cream to-soft-pink" />
       }
       className="text-center flex flex-col items-center justify-center"
     >

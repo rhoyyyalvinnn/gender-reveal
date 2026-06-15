@@ -43,22 +43,77 @@ export default function FloatingBackground({
 
 function CloudsLayer() {
   const clouds = [
-    { top: '8%', size: 'w-40', duration: 'animate-drift', delay: '0s', opacity: 0.9 },
-    { top: '22%', size: 'w-56', duration: 'animate-driftSlow', delay: '5s', opacity: 0.7 },
-    { top: '45%', size: 'w-32', duration: 'animate-drift', delay: '12s', opacity: 0.8 },
-    { top: '70%', size: 'w-48', duration: 'animate-driftSlow', delay: '3s', opacity: 0.6 },
+    {
+      top: '8%',
+      size: 'w-40',
+      opacity: 0.95,
+      duration: 75,
+      delay: 0,
+    },
+    {
+      top: '22%',
+      size: 'w-56',
+      opacity: 0.85,
+      duration: 95,
+      delay: 4,
+    },
+    {
+      top: '45%',
+      size: 'w-32',
+      opacity: 0.9,
+      duration: 70,
+      delay: 8,
+    },
+    {
+      top: '70%',
+      size: 'w-48',
+      opacity: 0.8,
+      duration: 110,
+      delay: 12,
+    },
   ]
 
   return (
     <>
       {clouds.map((cloud, i) => (
-        <div
+        <motion.div
           key={i}
-          className={`absolute ${cloud.size} ${cloud.duration}`}
-          style={{ top: cloud.top, left: '-15%', opacity: cloud.opacity, animationDelay: cloud.delay }}
+          className={`absolute ${cloud.size}`}
+          style={{
+            top: cloud.top,
+            opacity: cloud.opacity,
+          }}
+          initial={{
+            x: '-30vw',
+            color: '#60A5FA',
+          }}
+          animate={{
+            x: '120vw',
+            color: ['#60A5FA', '#60A5FA', '#FBCFE8', '#FBCFE8'],
+          }}
+          transition={{
+            x: {
+              duration: cloud.duration,
+              repeat: Infinity,
+              repeatType: 'loop',
+              ease: 'linear',
+              delay: cloud.delay,
+            },
+            color: {
+              duration: cloud.duration,
+              repeat: Infinity,
+              repeatType: 'loop',
+              ease: 'linear',
+              delay: cloud.delay,
+              times: [0, 0.48, 0.52, 1],
+            },
+          }}
         >
-          <CloudIcon className="w-full drop-shadow-sm" />
-        </div>
+          <CloudIcon
+            className="w-full drop-shadow-lg"
+            color="currentColor"
+          />
+        </motion.div>
       ))}
     </>
   )
@@ -99,19 +154,22 @@ function MoonLayer() {
 
 function BalloonsLayer() {
   const balloons = [
-    { left: '8%', color: '#FFD6E8', size: 'w-14', delay: '0s' },
-    { left: '78%', color: '#A7D8FF', size: 'w-20', delay: '1.5s' },
-    { left: '45%', color: '#E6D6FF', size: 'w-12', delay: '0.8s' },
-    { left: '60%', color: '#FFF2B3', size: 'w-16', delay: '2.2s' },
-    { left: '20%', color: '#A7D8FF', size: 'w-10', delay: '1s' },
+    { left: '6%', color: '#60A5FA', size: 'w-16', delay: '0.1s', top: '8%' },
+    { left: '14%', color: '#93C5FD', size: 'w-14', delay: '0.6s', bottom: '12%' },
+    { left: '26%', color: '#A5B4FC', size: 'w-12', delay: '1.1s', top: '20%' },
+    { left: '32%', color: '#60A5FA', size: 'w-14', delay: '0.9s', bottom: '8%' },
+    { left: '70%', color: '#FBCFE8', size: 'w-16', delay: '0.2s', top: '10%' },
+    { left: '78%', color: '#F9A8D4', size: 'w-14', delay: '0.7s', bottom: '14%' },
+    { left: '88%', color: '#FDE1EF', size: 'w-12', delay: '1.2s', top: '24%' },
+    { left: '94%', color: '#FBCFE8', size: 'w-14', delay: '1.6s', bottom: '6%' },
   ]
   return (
     <>
       {balloons.map((b, i) => (
         <div
           key={i}
-          className={`absolute bottom-[-10%] ${b.size} animate-bob`}
-          style={{ left: b.left, animationDelay: b.delay }}
+          className={`absolute ${b.size} animate-bob`}
+          style={{ left: b.left, top: b.top, bottom: b.bottom, animationDelay: b.delay }}
         >
           <BalloonIcon color={b.color} className="w-full drop-shadow-md" />
         </div>

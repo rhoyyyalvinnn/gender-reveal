@@ -22,7 +22,7 @@ export default function InvitationMessageSection() {
       id="invitation-message"
       background={
         <FloatingBackground
-          layers={['stars', 'moon', 'hearts', 'balloons']}
+          layers={['stars', 'moon', 'hearts']}
           gradient="from-lavender via-baby-blue to-soft-pink"
         />
       }
