@@ -1,0 +1,35 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // RSVP submissions:
+    // - Anyone (guests) can create a new RSVP (no auth required for ease of use).
+    // - No one can read, update, or delete from the client.
+    //   Use the Firebase Console or an authenticated admin tool for management.
+    match /rsvps/{rsvpId} {
+      allow create: if request.resource.data.keys().hasAll(
+                        ['fullName', 'email', 'phoneNumber', 'guestCount', 'attendance', 'submittedAt']
+                      )
+                      && request.resource.data.fullName is string
+                      && request.resource.data.email is string
+                      && request.resource.data.attendance in ['Happily Attending', "Sorry, Can't Attend"];
+
+      // The /admin dashboard needs to READ this collection.
+      // By default, reads are locked down. Choose ONE of the options below:
+      //
+      // OPTION A (recommended): Require Firebase Authentication and only
+      // allow specific admin UIDs/emails to read, e.g.:
+      //   allow read: if request.auth != null
+      //                && request.auth.token.email in ['you@example.com'];
+      //
+      // OPTION B (quick start / private link only): allow read for everyone.
+      // Only use this if the /admin URL is kept private, since RSVP data
+      // (names, emails, phone numbers) would be publicly readable.
+      //   allow read: if true;
+      allow read: if false;
+
+      allow update, delete: if false;
+    }
+  }
+}

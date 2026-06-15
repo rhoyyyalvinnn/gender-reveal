@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: 'Quicksand', ui-rounded, sans-serif;
+  background-color: #FFF8F0;
+  color: #5B4B66;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Fredoka', ui-rounded, sans-serif;
+}
+
+/* Scroll-snap storybook container */
+.snap-container {
+  height: 100vh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.snap-container.locked {
+  overflow: hidden;
+}
+
+.snap-slide {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Custom scrollbar */
+.snap-container::-webkit-scrollbar {
+  width: 6px;
+}
+.snap-container::-webkit-scrollbar-thumb {
+  background-color: #FF9EC4;
+  border-radius: 10px;
+}
+.snap-container::-webkit-scrollbar-track {
+  background-color: #FFF8F0;
+}
+
+/* Floating gradient text */
+.gradient-text {
+  background: linear-gradient(90deg, #FF9EC4, #A7D8FF, #C7A9FF);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Reusable card */
+.invite-card {
+  background: rgba(255, 248, 240, 0.85);
+  backdrop-filter: blur(6px);
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 40px rgba(255, 158, 196, 0.25);
+}
+
+/* Remove extra top padding for the very first slide to avoid visible whitespace */
+.snap-slide:first-child .section-content {
+  padding-top: 0 !important;
+}
+
+/* Focus visibility for accessibility */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid #A7D8FF;
+  outline-offset: 2px;
+}
+
+/* Reduce motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
