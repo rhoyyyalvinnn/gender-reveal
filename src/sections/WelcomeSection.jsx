@@ -33,7 +33,7 @@ function CloudBlob({ className = '', color = '#A7D8FF', style = {}, strokeColor 
 function DriftingCloud({ top, width, duration, delay, color = 'rgba(255,255,255,0.85)', strokeColor = null }) {
   return (
     <motion.div
-      className="hidden sm:absolute pointer-events-none"
+      className="absolute pointer-events-none"
       style={{ top, width }}
       initial={{ x: '-20vw' }}
       animate={{ x: '115vw' }}
@@ -97,12 +97,12 @@ export default function WelcomeSection({ onOpen }) {
         </motion.h1>
 
         {/* He or She */}
-        <motion.div className="grid grid-cols-1 md:grid-cols-[auto_auto_auto] place-items-center justify-center gap-3 sm:gap-8 my-4"
+        <motion.div className="grid grid-cols-[auto_auto_auto] place-items-center justify-center gap-4 sm:gap-8 my-4"
           initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.4, duration: 0.7, type: 'spring' }}>
-          <span className="text-4xl sm:text-6xl md:text-8xl text-baby-blue-deep drop-shadow-lg leading-none" style={{ fontFamily: "'Dancing Script', cursive", fontWeight: 700 }}>He</span>
-          <span className="font-body text-lg sm:text-xl text-[#5B4B66]/50 italic leading-none">or</span>
-          <span className="text-4xl sm:text-6xl md:text-8xl text-soft-pink-deep drop-shadow-lg leading-none" style={{ fontFamily: "'Dancing Script', cursive", fontWeight: 700 }}>She?</span>
+          <span className="text-6xl sm:text-7xl md:text-8xl text-baby-blue-deep drop-shadow-lg leading-none" style={{ fontFamily: "'Dancing Script', cursive", fontWeight: 700 }}>He</span>
+          <span className="font-body text-xl sm:text-2xl text-[#5B4B66]/50 italic leading-none">or</span>
+          <span className="text-6xl sm:text-7xl md:text-8xl text-soft-pink-deep drop-shadow-lg leading-none" style={{ fontFamily: "'Dancing Script', cursive", fontWeight: 700 }}>She?</span>
         </motion.div>
 
         {/* Teddy bear with glow */}
@@ -135,7 +135,7 @@ export default function WelcomeSection({ onOpen }) {
         <motion.div className="flex gap-2 mb-6 text-xl sm:text-2xl"
           initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.85, duration: 0.7 }}>
-          {['🎈', '🌸', '🎀', '🌸', '🎈'].map((e, i) => (
+          {['🩵', '🌸', '🤍', '🌸', '🩵'].map((e, i) => (
             <motion.span key={i}
               animate={{ y: [0, -6, 0] }}
               transition={{ delay: i * 0.15, duration: 2, repeat: Infinity, ease: 'easeInOut' }}>
@@ -171,30 +171,30 @@ function PosterBackground() {
       {/* BIG CORNER CLOUDS */}
 
       {/* Pink cluster — top right */}
-      <motion.div className="hidden sm:block absolute -top-10 -right-16 sm:-top-16 sm:-right-20"
+      <motion.div className="absolute -top-10 -right-16 sm:-top-16 sm:-right-20"
         initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1, ease: 'easeOut' }}>
-        <CloudBlob color="#FFE4F0" className="absolute -top-4 -right-4 w-[260px] sm:w-[400px] opacity-80" />
-        <CloudBlob color="#FFB8D9" className="relative w-[220px] sm:w-[360px]" />
+        <CloudBlob color="#FFE4F0" className="absolute -top-4 -right-4 w-[180px] sm:w-[400px] opacity-80" />
+        <CloudBlob color="#FFB8D9" className="relative w-[150px] sm:w-[360px]" />
       </motion.div>
 
       {/* Blue cluster — bottom left */}
-      <motion.div className="hidden sm:block absolute -bottom-10 -left-16 sm:-bottom-16 sm:-left-20"
+      <motion.div className="absolute -bottom-10 -left-16 sm:-bottom-16 sm:-left-20"
         initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1, ease: 'easeOut', delay: 0.1 }}>
-        <CloudBlob color="#C8E9FF" className="absolute -bottom-4 -left-4 w-[260px] sm:w-[400px] opacity-80" />
-        <CloudBlob color="#85CAFF" className="relative w-[220px] sm:w-[360px]" />
+        <CloudBlob color="#C8E9FF" className="absolute -bottom-4 -left-4 w-[180px] sm:w-[400px] opacity-80" />
+        <CloudBlob color="#85CAFF" className="relative w-[150px] sm:w-[360px]" />
       </motion.div>
 
       {/* Pink accent — mid left */}
-      <motion.div className="hidden sm:block absolute top-[28%] -left-12"
+      <motion.div className="absolute top-[28%] -left-12"
         animate={{ y: [0, -12, 0] }}
         transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}>
         <CloudBlob color="#FFD6E8" className="w-[140px] sm:w-[200px] opacity-75" />
       </motion.div>
 
       {/* Blue accent — mid right */}
-      <motion.div className="hidden sm:block absolute top-[20%] -right-12"
+      <motion.div className="absolute top-[20%] -right-12"
         animate={{ y: [0, 12, 0] }}
         transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 1 }}>
         <CloudBlob color="#A7D8FF" className="w-[140px] sm:w-[200px] opacity-75" />
@@ -215,12 +215,12 @@ function PosterBackground() {
       </motion.div>
 
       {/* DRIFTING WHITE CLOUDS (move L→R across screen) */}
-      <DriftingCloud top="12%"  width="160px" duration={55} delay={0}  color="rgba(240,248,255,0.90)" strokeColor="rgba(200,220,240,0.50)" />
-      <DriftingCloud top="35%"  width="220px" duration={75} delay={8}  color="rgba(245,245,250,0.85)" strokeColor="rgba(200,200,230,0.45)" />
-      <DriftingCloud top="58%"  width="140px" duration={60} delay={20} color="rgba(240,245,255,0.88)" strokeColor="rgba(200,220,240,0.50)" />
-      <DriftingCloud top="78%"  width="190px" duration={85} delay={5}  color="rgba(245,240,250,0.82)" strokeColor="rgba(200,200,230,0.45)" />
-      <DriftingCloud top="48%"  width="120px" duration={65} delay={35} color="rgba(255,240,245,0.70)" strokeColor="rgba(220,180,200,0.40)" />
-      <DriftingCloud top="20%"  width="100px" duration={90} delay={45} color="rgba(230,245,255,0.75)" strokeColor="rgba(180,210,240,0.40)" />
+      <DriftingCloud top="12%"  width="max(100px, min(160px, 24vw))" duration={55} delay={0}  color="rgba(240,248,255,0.90)" strokeColor="rgba(200,220,240,0.50)" />
+      <DriftingCloud top="35%"  width="max(130px, min(220px, 30vw))" duration={75} delay={8}  color="rgba(245,245,250,0.85)" strokeColor="rgba(200,200,230,0.45)" />
+      <DriftingCloud top="58%"  width="max(90px, min(140px, 22vw))" duration={60} delay={20} color="rgba(240,245,255,0.88)" strokeColor="rgba(200,220,240,0.50)" />
+      <DriftingCloud top="78%"  width="max(120px, min(190px, 26vw))" duration={85} delay={5}  color="rgba(245,240,250,0.82)" strokeColor="rgba(200,200,230,0.45)" />
+      <DriftingCloud top="48%"  width="max(80px, min(120px, 20vw))" duration={65} delay={35} color="rgba(255,240,245,0.70)" strokeColor="rgba(220,180,200,0.40)" />
+      <DriftingCloud top="20%"  width="max(70px, min(100px, 18vw))" duration={90} delay={45} color="rgba(230,245,255,0.75)" strokeColor="rgba(180,210,240,0.40)" />
 
       {/* OUTLINE HEARTS — poster corner accents */}
       <motion.div className="absolute top-[7%] left-[5%]"
