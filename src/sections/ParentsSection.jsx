@@ -103,31 +103,42 @@ export default function ParentsSection() {
       {/* ── Main card column ── */}
       <div className="relative z-20 flex flex-col items-center w-full max-w-xs sm:max-w-sm mx-auto px-4">
 
-        {/* Heading above card */}
-        <motion.div
-          className="flex flex-col items-center mb-3"
-          initial={{ opacity: 0, y: -10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.15, duration: 0.55 }}
+      <motion.div
+        className="flex items-center justify-center gap-2 mb-4 flex-wrap"
+        initial={{ opacity: 0, y: -10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.15, duration: 0.55 }}
+      >
+        <span
+          className="text-[#b06090]"
+          style={{
+            fontFamily: "'Dancing Script', cursive",
+            fontSize: 'clamp(1.4rem, 4vw, 2rem)',
+            lineHeight: 1,
+          }}
         >
-          {/* "Meet the" */}
-          <p className="font-heading font-semibold text-[#b06090] tracking-wide"
-            style={{ fontSize: 'clamp(0.95rem, 3vw, 1.2rem)' }}>
-            Meet my
-          </p>
-          {/* "Parents" in large script style */}
-          <div className="flex items-center gap-1.5">
-            <h2
-              className="font-heading font-bold gradient-text leading-none"
-              style={{ fontSize: 'clamp(2rem, 8vw, 3rem)', letterSpacing: '-0.01em' }}
-            >
-              Parents
-            </h2>
-            {/* small heart next to title */}
-            <HeartFilled color="#f9a8d4" className="w-4 h-4 sm:w-5 sm:h-5 mb-1 animate-floatY" style={{ animationDelay: '0.5s' }} />
-          </div>
-        </motion.div>
+          Meet my
+        </span>
+
+        <h2
+          className="font-heading font-bold gradient-text leading-none"
+          style={{
+            fontFamily: "'Dancing Script', cursive",
+            fontSize: 'clamp(2rem, 8vw, 3rem)',
+            fontWeight: 700,
+            letterSpacing: '-0.01em',
+          }}
+        >
+          Parents
+        </h2>
+
+        <HeartFilled
+          color="#f9a8d4"
+          className="w-5 h-5 sm:w-6 sm:h-6 animate-floatY flex-shrink-0"
+          style={{ animationDelay: '0.5s' }}
+        />
+      </motion.div>
 
         {/* Polaroid photo card */}
         <motion.div
