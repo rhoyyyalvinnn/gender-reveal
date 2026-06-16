@@ -5,12 +5,12 @@ import FloatingBackground from '../components/FloatingBackground.jsx'
 import { TeddyBearIcon, HeartIcon, BalloonIcon } from '../components/decor/Decorations.jsx'
 
 const items = [
-  { label: 'Breastfeeding essentials', icon: Milk, bg: 'bg-soft-pink' },
-  { label: 'Neutral color baby clothes', icon: Shirt, bg: 'bg-baby-blue' },
-  { label: 'Cetaphil baby essentials', icon: Droplet, bg: 'bg-lavender' },
-  { label: 'Baby detergent', icon: Sparkles, bg: 'bg-light-yellow' },
-  { label: 'Burping cloths', icon: Cloud, bg: 'bg-baby-blue' },
-  { label: 'Newborn swaddles', icon: Moon, bg: 'bg-lavender' },
+  { label: 'Baby diapers', icon: Milk, bg: 'bg-soft-pink' },
+  { label: 'Baby wipes', icon: Shirt, bg: 'bg-baby-blue' },
+  { label: 'Baby clothes', icon: Droplet, bg: 'bg-lavender' },
+  { label: 'Baby feeding supplies', icon: Sparkles, bg: 'bg-light-yellow'},
+  { label: 'Baby detergent', icon: Cloud, bg: 'bg-baby-blue' },
+  { label: 'Baby bath items', icon: Moon, bg: 'bg-lavender' },
   { label: 'Or any baby essentials', icon: Gift, bg: 'bg-soft-pink' },
 ]
 
@@ -31,7 +31,7 @@ export default function GiftListSection() {
     <SectionContainer
       id="gift-list"
       background={
-        <FloatingBackground layers={['clouds', 'hearts']} gradient="from-soft-pink via-cream to-baby-blue" />
+        <FloatingBackground layers={['stars', 'hearts']} gradient="from-soft-pink via-pink-200 to-baby-blue" />
       }
       className="text-center flex flex-col items-center justify-center"
     >

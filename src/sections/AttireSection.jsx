@@ -196,8 +196,7 @@ export default function AttireSection() {
           <p className="font-body text-[10px] sm:text-sm font-bold text-[#5B4B66]">Wear</p>
 
           <p
-            className="font-heading text-2xl sm:text-4xl font-black uppercase leading-tight"
-            style={{ color: pinkAccent }}
+            className="font-heading text-2xl sm:text-4xl font-black uppercase leading-tight text-soft-pink-deep"
           >
             PINK
           </p>
@@ -209,8 +208,7 @@ export default function AttireSection() {
           <div className="flex flex-col items-center gap-1">
             <BabyBadge color={pinkAccent} />
             <span
-              className="font-heading text-lg sm:text-2xl font-black uppercase"
-              style={{ color: pinkAccent }}
+              className="font-heading text-lg sm:text-2xl font-black uppercase text-soft-pink-deep"
             >
               GIRL
             </span>
@@ -237,8 +235,7 @@ export default function AttireSection() {
           <p className="font-body text-[10px] sm:text-sm font-bold text-[#5B4B66]">Wear</p>
 
           <p
-            className="font-heading text-2xl sm:text-4xl font-black uppercase leading-tight"
-            style={{ color: blueAccent }}
+            className="font-heading text-2xl sm:text-4xl font-black uppercase leading-tight text-baby-blue-deep"
           >
             BLUE
           </p>
@@ -247,11 +244,10 @@ export default function AttireSection() {
             if you think it's a
           </p>
 
-          <div className="flex flex-col items-center gap-1">
+          <div className="flex flex-col items-center gap-1 ">
             <BabyBadge color={blueAccent} />
             <span
-              className="font-heading text-lg sm:text-2xl font-black uppercase"
-              style={{ color: blueAccent }}
+              className="font-heading text-lg sm:text-2xl font-black uppercase text-baby-blue-deep"
             >
               BOY
             </span>
