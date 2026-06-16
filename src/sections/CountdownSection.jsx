@@ -23,7 +23,7 @@ export default function CountdownSection() {
     <SectionContainer
       id="countdown"
       background={
-        <FloatingBackground layers={['stars', 'moon']} gradient="from-lavender via-baby-blue to-cream" />
+        <FloatingBackground layers={['stars', 'moon', 'stars', 'moon', 'hearts', 'hearts']} gradient="from-lavender via-baby-blue to-cream" />
       }
       className="text-center flex flex-col items-center justify-center"
     >
