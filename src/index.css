@@ -127,3 +127,10 @@ html {
   background-color: #FFF8F0;
   border-radius: 10px;
 }
+
+/* Shadows Into Light utility class for invitation message */
+.shadows-into-light-regular {
+  font-family: "Shadows Into Light", cursive;
+  font-weight: 400;
+  font-style: normal;
+}

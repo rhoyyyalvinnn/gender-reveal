@@ -53,6 +53,10 @@ export default {
           '0%, 49%': { color: '#60A5FA' },
           '51%, 100%': { color: '#F472B6' },
         },
+        bobR: {
+          '0%, 100%': { transform: 'translateY(0) rotate(3deg)' },
+          '50%':      { transform: 'translateY(-10px) rotate(-3deg)' },
+        }
       },
       animation: {
         floatY: 'floatY 6s ease-in-out infinite',
@@ -66,6 +70,7 @@ export default {
         wiggle: 'wiggle 2s ease-in-out infinite',
         cloudShift: 'cloudShift 60s linear infinite',
         cloudShiftSlow: 'cloudShift 90s linear infinite',
+        bobR: 'bobR 4.5s ease-in-out infinite'
       },
     },
   },
