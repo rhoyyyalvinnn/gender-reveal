@@ -50,11 +50,11 @@ export const eventConfig = {
     description:
       'Come dressed in your softest pastels to match our dreamy baby-themed celebration!',
     suggestions: [
-      { name: 'Baby Blue', hex: '#A7D8FF' },
-      { name: 'Soft Pink', hex: '#FFD6E8' },
+      { name: 'Blue', hex: '#A7D8FF' },
+      { name: 'Pink', hex: '#FFD6E8' },
     ],
     resortNote:
-      "Paul's Place has a pool, so feel free to bring your swimwear and a change of clothes if you'd like to take a dip!",
+      "The entire venue and swimming pool are exclusively reserved for our celebration, so feel free to bring your swimwear if you’d like to take a dip!",
   },
 
   // ---- Message to Guests ----

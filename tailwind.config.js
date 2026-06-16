@@ -17,6 +17,7 @@ export default {
       fontFamily: {
         heading: ['Fredoka', 'ui-rounded', 'sans-serif'],
         body: ['Quicksand', 'ui-rounded', 'sans-serif'],
+        signature: ['Inspiration', 'cursive'],
       },
       keyframes: {
         floatY: {
