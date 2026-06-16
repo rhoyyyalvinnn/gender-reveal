@@ -158,14 +158,20 @@ export default function ParentsSection() {
             }}
           >
             {/* Photo */}
-            <div className="w-full rounded-xl overflow-hidden" style={{ aspectRatio: '3/4' }}>
-              <img
-                src={gallery[1]}
-                alt={`${momName} and ${dadName}`}
-                className="w-full h-full object-cover"
-                loading="lazy"
-              />
-            </div>
+          <div
+            className="w-full rounded-xl overflow-hidden"
+            style={{
+              aspectRatio: '3/4',
+              letterSpacing: '0.02em',
+            }}
+          >
+            <img
+              src={gallery[1]}
+              alt={`${momName} and ${dadName}`}
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
 
             {/* Polaroid name ribbon — overlapping bottom of photo */}
             <div className="relative -mt-5 flex justify-center z-10">
@@ -183,8 +189,15 @@ export default function ParentsSection() {
                 <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 w-0 h-0"
                   style={{ borderTop: '10px solid transparent', borderBottom: '10px solid transparent', borderLeft: '14px solid #f472b6cc' }} />
 
-                <p className="font-heading font-semibold text-white text-center whitespace-nowrap drop-shadow-sm"
-                  style={{ fontSize: 'clamp(0.95rem, 3.5vw, 1.2rem)' }}>
+                <p
+                  className="text-white text-center whitespace-nowrap drop-shadow-sm"
+                  style={{
+                    fontSize: 'clamp(1.1rem, 4vw, 1.5rem)',
+                    fontFamily: "'Dancing Script', cursive",
+                    letterSpacing: '0.02em',
+                    fontWeight: 700,
+                  }}
+                >
                   {momName} &amp; {dadName}
                 </p>
               </div>

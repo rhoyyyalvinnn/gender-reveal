@@ -50,7 +50,7 @@ export default function GenderRevealSection() {
         viewport={{ once: true }}
         transition={{ duration: 0.7 }}
       >
-        Boy or Girl?
+        Am I a BOY or a GIRL?
       </motion.h2>
 
       <p className="font-body text-lg text-[#5B4B66] mb-10 max-w-md">

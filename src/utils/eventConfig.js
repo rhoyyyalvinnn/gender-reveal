@@ -28,7 +28,7 @@ export const eventConfig = {
     revealTextBoy: "It's a BOY! 💙",
     revealTextGirl: "It's a GIRL! 💗",
     revealTextSurprise: 'Still a Sweet Surprise!',
-    subTextSurprise: "We can't wait to find out together at the party!",
+    subTextSurprise: "Come and join us as we find out together! Will it be pink or blue? We can’t wait to share this special moment with you!",
   },
 
   // ---- Baby Shower Event Details ----

@@ -85,10 +85,6 @@ export default function HomePage() {
         <GiftListSection />
         <CountdownSection />
         <RsvpSection />
-
-        <footer className="w-full text-center py-6 font-body text-sm text-[#5B4B66]/60 bg-cream">
-          Made with 💗 for our little one
-        </footer>
       </div>
     </div>
   )
