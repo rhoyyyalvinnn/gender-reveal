@@ -163,7 +163,7 @@ export default function WelcomeSection({ onOpen }) {
         <motion.p className="mt-5 text-sm text-[#5B4B66]/50 animate-bob"
           initial={{ opacity: 0 }} animate={{ opacity: 1 }}
           transition={{ delay: 1.4, duration: 0.8 }}>
-          scroll or tap to begin ↓
+          tap to begin ↓
         </motion.p>
       </motion.div>
     </SectionContainer>

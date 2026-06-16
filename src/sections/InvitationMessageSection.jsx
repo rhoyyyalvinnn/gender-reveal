@@ -186,7 +186,6 @@ export default function InvitationMessageSection() {
               ))}
             </svg>
           </motion.div>
-
           {/* Card text */}
           <motion.div
             variants={container}
@@ -195,62 +194,79 @@ export default function InvitationMessageSection() {
             viewport={{ once: true }}
             className="flex flex-col text-center"
           >
-            <motion.p variants={item}
-              className="font-body shadows-into-light-regular text-sm sm:text-base leading-relaxed text-[#4A3B58]">
+            <motion.p
+              variants={item}
+              className="font-body shadows-into-light-regular text-lg sm:text-xl leading-relaxed text-[#4A3B58]"
+            >
               Mama and Papa prayed for a little me, and finally, I'm here!
             </motion.p>
 
-            <motion.p variants={item}
-              className="font-body shadows-into-light-regular text-sm sm:text-base leading-relaxed text-[#4A3B58] mt-2.5">
-              I felt all the happiness and excitement when my Mama &amp; Papa shared this
-              news with their closest friends and loved ones.
+            <motion.p
+              variants={item}
+              className="font-body shadows-into-light-regular text-lg sm:text-xl leading-relaxed text-[#4A3B58] mt-4"
+            >
+              I felt all the happiness and excitement when my Mama &amp; Papa
+              shared this news with their closest friends and loved ones.
             </motion.p>
 
-            <motion.p variants={item}
-              className="font-body shadows-into-light-regular text-sm sm:text-base leading-relaxed text-[#4A3B58] mt-2.5">
+            <motion.p
+              variants={item}
+              className="font-body shadows-into-light-regular text-lg sm:text-xl leading-relaxed text-[#4A3B58] mt-4"
+            >
               So, I'd love to invite you to my very intimate{' '}
-              <span className="font-semibold text-soft-pink-deep">Gender Reveal</span>
-              {' '}&amp;{' '}
-              <span className="font-semibold text-baby-blue-deep">Baby Shower</span>{' '}
+              <span className="font-semibold text-soft-pink-deep">
+                Gender Reveal
+              </span>{' '}
+              &amp;{' '}
+              <span className="font-semibold text-baby-blue-deep">
+                Baby Shower
+              </span>{' '}
               to celebrate with us.
             </motion.p>
 
-            <motion.p variants={item}
-              className="font-body shadows-into-light-regular text-sm sm:text-base leading-relaxed text-[#4A3B58] mt-2.5">
-              In a few months, I'll be seeing the world — I can't wait to see you soon!
+            <motion.p
+              variants={item}
+              className="font-body shadows-into-light-regular text-lg sm:text-xl leading-relaxed text-[#4A3B58] mt-4"
+            >
+              In a few months, I'll be seeing the world — I can't wait to see
+              you soon!
             </motion.p>
 
             {/* Wave divider */}
-            <motion.div variants={item}>
+            <motion.div variants={item} className="mt-6">
               <WaveDivider />
             </motion.div>
 
             {/* Sign-off row */}
-            <motion.div variants={item}
-              className="flex items-center justify-center gap-2 sm:gap-3">
+            <motion.div
+              variants={item}
+              className="flex items-center justify-center gap-2 sm:gap-3 mt-4"
+            >
               {/* Left bears */}
               <div className="flex items-end gap-0.5 flex-shrink-0">
-                <TeddyBearIcon className="w-7 h-7 sm:w-9 sm:h-9 drop-shadow animate-bob" />
-                <TeddyBearIcon className="w-5 h-5 sm:w-7 sm:h-7 drop-shadow animate-bobR mb-0.5 opacity-75" />
+                <TeddyBearIcon className="w-8 h-8 sm:w-10 sm:h-10 drop-shadow animate-bob" />
+                <TeddyBearIcon className="w-6 h-6 sm:w-8 sm:h-8 drop-shadow animate-bobR mb-0.5 opacity-75" />
               </div>
 
               {/* Text */}
               <div className="text-center flex-1 min-w-0 px-1">
-                <p className="font-heading text-xs sm:text-sm text-[#7A6586]">Lots of love,</p>
-                <p className="font-heading font-semibold text-xs sm:text-base gradient-text leading-snug mt-0.5">
+                <p className="font-heading text-base sm:text-lg text-[#7A6586]">
+                  Lots of love,
+                </p>
+
+                <p className="font-heading font-semibold text-lg sm:text-2xl gradient-text leading-snug mt-1">
                   Mama &amp; Papa's Little One
                 </p>
               </div>
 
               {/* Right bears (mirrored) */}
               <div className="flex items-end gap-0.5 flex-shrink-0">
-                <TeddyBearIcon className="w-5 h-5 sm:w-7 sm:h-7 drop-shadow animate-bob mb-0.5 opacity-75 scale-x-[-1]" />
-                <TeddyBearIcon className="w-7 h-7 sm:w-9 sm:h-9 drop-shadow animate-bobR scale-x-[-1]" />
+                <TeddyBearIcon className="w-6 h-6 sm:w-8 sm:h-8 drop-shadow animate-bob mb-0.5 opacity-75 scale-x-[-1]" />
+                <TeddyBearIcon className="w-8 h-8 sm:w-10 sm:h-10 drop-shadow animate-bobR scale-x-[-1]" />
               </div>
             </motion.div>
           </motion.div>
         </motion.div>
-
       </div>
     </SectionContainer>
   )
