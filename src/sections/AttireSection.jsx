@@ -110,12 +110,12 @@ function OnesieIcon({ fill, stroke, label, className = '' }) {
  */
 function BabyBadge({ color }) {
   return (
-    <div className="flex gap-1">
+    <div className="flex gap-0.5">
       {['B', 'A', 'B', 'Y'].map((letter) => (
         <span
           key={letter}
-          className="inline-flex items-center justify-center w-5 h-5 rounded text-white text-xs font-black"
-          style={{ backgroundColor: color }}
+          className="inline-flex items-center justify-center w-4 h-4 rounded text-white font-black"
+          style={{ backgroundColor: color, fontSize: '9px' }}
         >
           {letter}
         </span>
@@ -141,8 +141,7 @@ function StarDeco({ className = '', delay = 0 }) {
 
 /**
  * SLIDE 5 — Dress Code / Attire Guide
- * Two-panel card layout inspired by the pink-vs-blue dress-code reference.
- * Guests wear PINK for Girl, BLUE for Boy.
+ * Two-panel card layout — always 2 columns, including on mobile.
  */
 export default function AttireSection() {
   const { resortNote } = eventConfig.attire
@@ -177,14 +176,14 @@ export default function AttireSection() {
         transition={{ duration: 0.6 }}
         className="mb-1"
       >
-        <h2 className="font-heading text-3xl sm:text-5xl font-black tracking-widest uppercase gradient-text">
+        <h2 className="font-heading text-2xl sm:text-5xl font-black tracking-widest uppercase gradient-text">
           What to Wear?
         </h2>
-        <div className="h-1 w-24 mx-auto mt-2 mb-6 rounded-full bg-gradient-to-r from-pink-400 to-blue-400" />
+        <div className="h-1 w-20 mx-auto mt-2 mb-4 rounded-full bg-gradient-to-r from-pink-400 to-blue-400" />
       </motion.div>
 
-      {/* Two-panel cards */}
-      <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full max-w-lg px-4">
+      {/* Two-panel cards — always 2 columns */}
+      <div className="grid grid-cols-2 gap-3 sm:gap-6 w-full max-w-lg px-3 sm:px-4">
 
         {/* PINK — GIRL card */}
         <motion.div
@@ -192,36 +191,38 @@ export default function AttireSection() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.15, duration: 0.6 }}
-          className="flex-1 rounded-3xl border-4 border-pink-300 bg-gradient-to-b from-pink-100 to-pink-50 flex flex-col items-center py-6 px-4 gap-3 shadow-lg"
+          className="rounded-2xl sm:rounded-3xl border-4 border-pink-300 bg-gradient-to-b from-pink-100 to-pink-50 flex flex-col items-center py-4 px-2 sm:py-6 sm:px-4 gap-2 sm:gap-3 shadow-lg"
         >
-          <p className="font-body text-sm font-bold text-[#5B4B66]">Wear</p>
+          <p className="font-body text-[10px] sm:text-sm font-bold text-[#5B4B66]">Wear</p>
 
           <p
-            className="font-heading text-4xl font-black uppercase"
+            className="font-heading text-2xl sm:text-4xl font-black uppercase leading-tight"
             style={{ color: pinkAccent }}
           >
             PINK
           </p>
 
-          <p className="font-body text-xs font-semibold text-[#5B4B66]">if you think it's a</p>
+          <p className="font-body text-[9px] sm:text-xs font-semibold text-[#5B4B66]">
+            if you think it's a
+          </p>
 
-          <div className="flex items-center gap-2">
+          <div className="flex flex-col items-center gap-1">
             <BabyBadge color={pinkAccent} />
             <span
-              className="font-heading text-2xl font-black uppercase"
+              className="font-heading text-lg sm:text-2xl font-black uppercase"
               style={{ color: pinkAccent }}
             >
               GIRL
             </span>
           </div>
 
-          <PinkTeddyBear className="w-28 h-24 sm:w-32 sm:h-28" />
+          <PinkTeddyBear className="w-20 h-16 sm:w-32 sm:h-28" />
 
           <OnesieIcon
             fill="#f9c0d5"
             stroke={pinkAccent}
             label="GIRL"
-            className="w-14 h-14"
+            className="w-10 h-10 sm:w-14 sm:h-14"
           />
         </motion.div>
 
@@ -231,36 +232,38 @@ export default function AttireSection() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.25, duration: 0.6 }}
-          className="flex-1 rounded-3xl border-4 border-blue-300 bg-gradient-to-b from-blue-100 to-blue-50 flex flex-col items-center py-6 px-4 gap-3 shadow-lg"
+          className="rounded-2xl sm:rounded-3xl border-4 border-blue-300 bg-gradient-to-b from-blue-100 to-blue-50 flex flex-col items-center py-4 px-2 sm:py-6 sm:px-4 gap-2 sm:gap-3 shadow-lg"
         >
-          <p className="font-body text-sm font-bold text-[#5B4B66]">Wear</p>
+          <p className="font-body text-[10px] sm:text-sm font-bold text-[#5B4B66]">Wear</p>
 
           <p
-            className="font-heading text-4xl font-black uppercase"
+            className="font-heading text-2xl sm:text-4xl font-black uppercase leading-tight"
             style={{ color: blueAccent }}
           >
             BLUE
           </p>
 
-          <p className="font-body text-xs font-semibold text-[#5B4B66]">if you think it's a</p>
+          <p className="font-body text-[9px] sm:text-xs font-semibold text-[#5B4B66]">
+            if you think it's a
+          </p>
 
-          <div className="flex items-center gap-2">
+          <div className="flex flex-col items-center gap-1">
             <BabyBadge color={blueAccent} />
             <span
-              className="font-heading text-2xl font-black uppercase"
+              className="font-heading text-lg sm:text-2xl font-black uppercase"
               style={{ color: blueAccent }}
             >
               BOY
             </span>
           </div>
 
-          <BlueTeddyBear className="w-28 h-24 sm:w-32 sm:h-28" />
+          <BlueTeddyBear className="w-20 h-16 sm:w-32 sm:h-28" />
 
           <OnesieIcon
             fill="#bfdbfe"
             stroke={blueAccent}
             label="BOY"
-            className="w-14 h-14"
+            className="w-10 h-10 sm:w-14 sm:h-14"
           />
         </motion.div>
       </div>
@@ -272,10 +275,10 @@ export default function AttireSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4, duration: 0.6 }}
-          className="invite-card max-w-sm mx-auto mt-6 px-5 py-4 flex flex-col sm:flex-row items-center gap-3 shadow-md"
+          className="invite-card max-w-sm mx-auto mt-4 sm:mt-6 px-4 py-3 sm:px-5 sm:py-4 flex items-start sm:items-center gap-2 sm:gap-3 shadow-md"
         >
-          <span className="text-2xl">🏊</span>
-          <p className="font-body text-sm text-[#5B4B66] text-center sm:text-left">
+          <span className="text-xl sm:text-2xl shrink-0">🏊</span>
+          <p className="font-body text-xs sm:text-sm text-[#5B4B66] text-left">
             <span className="font-heading text-soft-pink-deep">Pool tip: </span>
             {resortNote}
           </p>

@@ -294,8 +294,8 @@ export default function GenderRevealSection() {
         transition={{ duration: 0.7 }}
         className="mb-1"
       >
-        <h2 className="font-heading text-2xl sm:text-4xl md:text-5xl font-bold mb-2">
-          Am I a <span className="text-blue-600">BOY</span> or a <span className="text-pink-600">GIRL</span>?
+        <h2 className="font-heading text-2xl sm:text-4xl text-[#5B4B66]/50 md:text-5xl font-bold mb-2">
+          Am I a <span className="text-baby-blue-deep">BOY</span> or a <span className="text-soft-pink-deep">GIRL</span>?
         </h2>
         <div className="h-1 w-24 mx-auto rounded-full bg-gradient-to-r from-pink-400 to-blue-400" />
       </motion.div>
@@ -390,16 +390,24 @@ export default function GenderRevealSection() {
                 exit={{ opacity: 0, scale: 1.5, rotate: 15 }}
                 transition={{ duration: 0.5, type: 'spring' }}
               >
-                <div className="relative">
-                  <GradientGiftBox className="w-40 h-40 sm:w-56 sm:h-56 md:w-72 md:h-72 drop-shadow-2xl" />
-                  <motion.div
-                    className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/20 to-transparent"
-                    animate={{ opacity: [0.3, 0.6, 0.3] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  />
-                </div>
+              <div className="relative">
+                <GradientGiftBox className="w-40 h-40 sm:w-56 sm:h-56 md:w-72 md:h-72 drop-shadow-2xl" />
+
+                <motion.div
+                  className="absolute inset-0 rounded-3xl bg-gradient-to-br from-pink-200 via-pink-100 to-blue-200"
+                  animate={{
+                    opacity: [0.35, 0.7, 0.35],
+                    scale: [1, 1.05, 1],
+                  }}
+                  transition={{
+                    duration: 2.5,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                  }}
+                />
+              </div>
                 <motion.p
-                  className="font-heading text-lg sm:text-2xl md:text-3xl font-bold text-pink-600 mt-2 sm:mt-4 drop-shadow-sm"
+                  className="font-heading text-lg sm:text-2xl md:text-3xl font-bold text-soft-pink-deep mt-2 sm:mt-4 drop-shadow-sm"
                   animate={{ y: [0, 3, 0] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 >
