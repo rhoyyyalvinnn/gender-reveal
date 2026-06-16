@@ -7,118 +7,152 @@ import { useConfetti } from '../hooks/useConfetti.js'
 import { eventConfig } from '../utils/eventConfig.js'
 
 /**
- * Teddy Bear Component - Pink
+ * Teddy Bear Component - Pink with Glow
  */
 function PinkTeddyBear({ className = '' }) {
   return (
-    <motion.svg
-      className={className}
-      viewBox="0 0 100 120"
-      xmlns="http://www.w3.org/2000/svg"
-      initial={{ y: 0 }}
-      animate={{ y: [0, -8, 0] }}
-      transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-    >
-      {/* Body */}
-      <ellipse cx="50" cy="70" rx="18" ry="25" fill="#FFB6D9" stroke="#FF69B4" strokeWidth="1" />
-      {/* Head */}
-      <circle cx="50" cy="40" r="15" fill="#FFB6D9" stroke="#FF69B4" strokeWidth="1" />
-      {/* Left Ear */}
-      <circle cx="35" cy="25" r="8" fill="#FFB6D9" stroke="#FF69B4" strokeWidth="1" />
-      {/* Right Ear */}
-      <circle cx="65" cy="25" r="8" fill="#FFB6D9" stroke="#FF69B4" strokeWidth="1" />
-      {/* Ears Inner */}
-      <circle cx="35" cy="25" r="4" fill="#FFC0E0" />
-      <circle cx="65" cy="25" r="4" fill="#FFC0E0" />
-      {/* Left Arm */}
-      <ellipse cx="28" cy="65" rx="8" ry="16" fill="#FFB6D9" stroke="#FF69B4" strokeWidth="1" />
-      {/* Right Arm */}
-      <ellipse cx="72" cy="65" rx="8" ry="16" fill="#FFB6D9" stroke="#FF69B4" strokeWidth="1" />
-      {/* Left Leg */}
-      <ellipse cx="38" cy="95" rx="9" ry="14" fill="#FFB6D9" stroke="#FF69B4" strokeWidth="1" />
-      {/* Right Leg */}
-      <ellipse cx="62" cy="95" rx="9" ry="14" fill="#FFB6D9" stroke="#FF69B4" strokeWidth="1" />
-      {/* Belly */}
-      <ellipse cx="50" cy="75" rx="10" ry="14" fill="#FFC0E0" />
-      {/* Face - Eyes */}
-      <circle cx="43" cy="37" r="2.5" fill="#333" />
-      <circle cx="57" cy="37" r="2.5" fill="#333" />
-      {/* Nose */}
-      <circle cx="50" cy="43" r="2" fill="#FF1493" />
-      {/* Mouth */}
-      <path
-        d="M 50 43 Q 46 46 43 45"
-        stroke="#333"
-        strokeWidth="1.5"
-        fill="none"
-        strokeLinecap="round"
+    <motion.div className="relative" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.8 }}>
+      {/* Glow effect */}
+      <motion.div
+        className="absolute inset-0 rounded-full"
+        style={{
+          background: 'radial-gradient(circle, rgba(249,168,212,0.45) 0%, transparent 70%)',
+          transform: 'scale(1.7)',
+          zIndex: -1,
+        }}
+        animate={{ scale: [1.5, 1.9, 1.5] }}
+        transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
       />
-      <path
-        d="M 50 43 Q 54 46 57 45"
-        stroke="#333"
-        strokeWidth="1.5"
-        fill="none"
-        strokeLinecap="round"
-      />
-    </motion.svg>
+
+      <motion.svg
+        className={className}
+        viewBox="0 0 680 500"
+        xmlns="http://www.w3.org/2000/svg"
+        animate={{ y: [0, -8, 0] }}
+        transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        {/* Ears (behind head) */}
+        <circle cx="255" cy="155" r="48" fill="#f4a0c0" />
+        <circle cx="425" cy="155" r="48" fill="#f4a0c0" />
+        {/* Ear inner */}
+        <circle cx="255" cy="155" r="28" fill="#f9c0d5" />
+        <circle cx="425" cy="155" r="28" fill="#f9c0d5" />
+
+        {/* Body */}
+        <ellipse cx="340" cy="360" rx="90" ry="105" fill="#f4a0c0" />
+
+        {/* Head */}
+        <circle cx="340" cy="220" r="100" fill="#f4a0c0" />
+
+        {/* Snout */}
+        <ellipse cx="340" cy="248" rx="52" ry="40" fill="#f9c0d5" />
+
+        {/* Belly patch */}
+        <ellipse cx="340" cy="360" rx="58" ry="72" fill="#f9c0d5" />
+
+        {/* Eyes */}
+        <circle cx="308" cy="205" r="13" fill="#2d1a1a" />
+        <circle cx="372" cy="205" r="13" fill="#2d1a1a" />
+        {/* Eye shine */}
+        <circle cx="313" cy="200" r="5" fill="white" />
+        <circle cx="377" cy="200" r="5" fill="white" />
+
+        {/* Nose */}
+        <ellipse cx="340" cy="235" rx="10" ry="7" fill="#c0547a" />
+
+        {/* Mouth */}
+        <path d="M 325 248 Q 340 262 355 248" stroke="#c0547a" strokeWidth="3" fill="none" strokeLinecap="round" />
+
+        {/* Arms */}
+        <ellipse cx="228" cy="350" rx="36" ry="65" fill="#f4a0c0" transform="rotate(-12 228 350)" />
+        <ellipse cx="452" cy="350" rx="36" ry="65" fill="#f4a0c0" transform="rotate(12 452 350)" />
+
+        {/* Legs */}
+        <ellipse cx="295" cy="448" rx="42" ry="30" fill="#f4a0c0" />
+        <ellipse cx="385" cy="448" rx="42" ry="30" fill="#f4a0c0" />
+        {/* Paw pads */}
+        <ellipse cx="295" cy="455" rx="28" ry="18" fill="#f9c0d5" />
+        <ellipse cx="385" cy="455" rx="28" ry="18" fill="#f9c0d5" />
+
+        {/* Heart on belly */}
+        <path d="M 340 348 C 340 348 325 334 318 340 C 311 346 318 358 340 370 C 362 358 369 346 362 340 C 355 334 340 348 340 348 Z" fill="#e8608a" />
+      </motion.svg>
+    </motion.div>
   )
 }
 
 /**
- * Teddy Bear Component - Blue
+ * Teddy Bear Component - Blue with Glow
  */
 function BlueTeddyBear({ className = '' }) {
   return (
-    <motion.svg
-      className={className}
-      viewBox="0 0 100 120"
-      xmlns="http://www.w3.org/2000/svg"
-      initial={{ y: 0 }}
-      animate={{ y: [0, -8, 0] }}
-      transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut', delay: 0.3 }}
-    >
-      {/* Body */}
-      <ellipse cx="50" cy="70" rx="18" ry="25" fill="#A7D8FF" stroke="#4A90E2" strokeWidth="1" />
-      {/* Head */}
-      <circle cx="50" cy="40" r="15" fill="#A7D8FF" stroke="#4A90E2" strokeWidth="1" />
-      {/* Left Ear */}
-      <circle cx="35" cy="25" r="8" fill="#A7D8FF" stroke="#4A90E2" strokeWidth="1" />
-      {/* Right Ear */}
-      <circle cx="65" cy="25" r="8" fill="#A7D8FF" stroke="#4A90E2" strokeWidth="1" />
-      {/* Ears Inner */}
-      <circle cx="35" cy="25" r="4" fill="#C5E3FF" />
-      <circle cx="65" cy="25" r="4" fill="#C5E3FF" />
-      {/* Left Arm */}
-      <ellipse cx="28" cy="65" rx="8" ry="16" fill="#A7D8FF" stroke="#4A90E2" strokeWidth="1" />
-      {/* Right Arm */}
-      <ellipse cx="72" cy="65" rx="8" ry="16" fill="#A7D8FF" stroke="#4A90E2" strokeWidth="1" />
-      {/* Left Leg */}
-      <ellipse cx="38" cy="95" rx="9" ry="14" fill="#A7D8FF" stroke="#4A90E2" strokeWidth="1" />
-      {/* Right Leg */}
-      <ellipse cx="62" cy="95" rx="9" ry="14" fill="#A7D8FF" stroke="#4A90E2" strokeWidth="1" />
-      {/* Belly */}
-      <ellipse cx="50" cy="75" rx="10" ry="14" fill="#C5E3FF" />
-      {/* Face - Eyes */}
-      <circle cx="43" cy="37" r="2.5" fill="#333" />
-      <circle cx="57" cy="37" r="2.5" fill="#333" />
-      {/* Nose */}
-      <circle cx="50" cy="43" r="2" fill="#1E5BA8" />
-      {/* Mouth */}
-      <path
-        d="M 50 43 Q 46 46 43 45"
-        stroke="#333"
-        strokeWidth="1.5"
-        fill="none"
-        strokeLinecap="round"
+    <motion.div className="relative" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.8 }}>
+      {/* Glow effect */}
+      <motion.div
+        className="absolute inset-0 rounded-full"
+        style={{
+          background: 'radial-gradient(circle, rgba(147,197,253,0.45) 0%, transparent 70%)',
+          transform: 'scale(1.7)',
+          zIndex: -1,
+        }}
+        animate={{ scale: [1.5, 1.9, 1.5] }}
+        transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut', delay: 0.3 }}
       />
-      <path
-        d="M 50 43 Q 54 46 57 45"
-        stroke="#333"
-        strokeWidth="1.5"
-        fill="none"
-        strokeLinecap="round"
-      />
-    </motion.svg>
+
+      <motion.svg
+        className={className}
+        viewBox="0 0 680 500"
+        xmlns="http://www.w3.org/2000/svg"
+        animate={{ y: [0, -8, 0] }}
+        transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut', delay: 0.3 }}
+      >
+        {/* Ears (behind head) */}
+        <circle cx="255" cy="155" r="48" fill="#93c5fd" />
+        <circle cx="425" cy="155" r="48" fill="#93c5fd" />
+        {/* Ear inner */}
+        <circle cx="255" cy="155" r="28" fill="#bfdbfe" />
+        <circle cx="425" cy="155" r="28" fill="#bfdbfe" />
+
+        {/* Body */}
+        <ellipse cx="340" cy="360" rx="90" ry="105" fill="#93c5fd" />
+
+        {/* Head */}
+        <circle cx="340" cy="220" r="100" fill="#93c5fd" />
+
+        {/* Snout */}
+        <ellipse cx="340" cy="248" rx="52" ry="40" fill="#bfdbfe" />
+
+        {/* Belly patch */}
+        <ellipse cx="340" cy="360" rx="58" ry="72" fill="#bfdbfe" />
+
+        {/* Eyes */}
+        <circle cx="308" cy="205" r="13" fill="#1e2d3d" />
+        <circle cx="372" cy="205" r="13" fill="#1e2d3d" />
+        {/* Eye shine */}
+        <circle cx="313" cy="200" r="5" fill="white" />
+        <circle cx="377" cy="200" r="5" fill="white" />
+
+        {/* Nose */}
+        <ellipse cx="340" cy="235" rx="10" ry="7" fill="#2563eb" />
+
+        {/* Mouth */}
+        <path d="M 325 248 Q 340 262 355 248" stroke="#2563eb" strokeWidth="3" fill="none" strokeLinecap="round" />
+
+        {/* Arms */}
+        <ellipse cx="228" cy="350" rx="36" ry="65" fill="#93c5fd" transform="rotate(-12 228 350)" />
+        <ellipse cx="452" cy="350" rx="36" ry="65" fill="#93c5fd" transform="rotate(12 452 350)" />
+
+        {/* Legs */}
+        <ellipse cx="295" cy="448" rx="42" ry="30" fill="#93c5fd" />
+        <ellipse cx="385" cy="448" rx="42" ry="30" fill="#93c5fd" />
+        {/* Paw pads */}
+        <ellipse cx="295" cy="455" rx="28" ry="18" fill="#bfdbfe" />
+        <ellipse cx="385" cy="455" rx="28" ry="18" fill="#bfdbfe" />
+
+        {/* Star on belly */}
+        <path d="M 340 330 L 346 345 L 362 345 L 349 355 L 354 370 L 340 361 L 326 370 L 331 355 L 318 345 L 334 345 Z" fill="#1d4ed8" />
+      </motion.svg>
+    </motion.div>
   )
 }
 
@@ -274,13 +308,12 @@ export default function GenderRevealSection() {
         viewport={{ once: true }}
         transition={{ delay: 0.2, duration: 0.7 }}
       >
-        Can't wait to meet our little one? <br />
-        <span className="font-semibold text-gray-700">Open the gift to reveal!</span>
+        Open the gift to reveal!
       </motion.p>
 
       {/* Main Content Area */}
       <div className="relative w-full max-w-2xl px-4 sm:px-6">
-        {/* Teddy Bears - Left and Right */}
+        {/* Teddy Bears - Left and Right (desktop) */}
         <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-8 hidden lg:block">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
