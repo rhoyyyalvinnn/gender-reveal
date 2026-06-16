@@ -145,10 +145,17 @@ export default function WelcomeSection({ onOpen }) {
         </motion.div>
 
         {/* CTA Button */}
-        <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 1, duration: 0.6, type: 'spring' }}>
-          <PrimaryButton onClick={handleOpen} variant="pink" aria-label="Open the invitation">
-            Open Invitation 💌
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 1, duration: 0.6, type: 'spring' }}
+        >
+          <PrimaryButton
+            onClick={handleOpen}
+            aria-label="Open the invitation"
+            className="bg-gradient-to-r from-blue-400 via-purple-300 to-pink-400 text-white hover:from-blue-500 hover:to-pink-500 shadow-lg"
+          >
+            💙 Open Invitation 🩷
           </PrimaryButton>
         </motion.div>
 
