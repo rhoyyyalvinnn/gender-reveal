@@ -337,22 +337,23 @@ export default function GenderRevealSection() {
         </div>
 
         {/* Teddy Bears for Mobile */}
-        <div className="flex justify-center gap-4 mb-6 lg:hidden">
+        <div className="flex justify-center gap-5 mb-6 lg:hidden">
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
           >
-            <PinkTeddyBear className="w-16 h-16 sm:w-24 sm:h-24" />
+            <PinkTeddyBear className="w-32 h-32 sm:w-40 sm:h-40" />
           </motion.div>
+
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
           >
-            <BlueTeddyBear className="w-16 h-16 sm:w-24 sm:h-24" />
+            <BlueTeddyBear className="w-32 h-32 sm:w-40 sm:h-40" />
           </motion.div>
         </div>
 
@@ -471,31 +472,6 @@ export default function GenderRevealSection() {
           </AnimatePresence>
         </div>
       </div>
-
-      {/* Bottom decorative elements */}
-      <motion.div
-        className="mt-6 sm:mt-8 flex justify-center gap-3 sm:gap-4 text-2xl sm:text-3xl"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.6, duration: 0.7 }}
-      >
-        <motion.span animate={{ y: [0, -8, 0] }} transition={{ duration: 2, repeat: Infinity }}>
-          🎈
-        </motion.span>
-        <motion.span
-          animate={{ y: [0, -8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, delay: 0.2 }}
-        >
-          🎉
-        </motion.span>
-        <motion.span
-          animate={{ y: [0, -8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, delay: 0.4 }}
-        >
-          🎈
-        </motion.span>
-      </motion.div>
     </SectionContainer>
   )
 }
