@@ -128,7 +128,7 @@ function BlueTeddyBear({ className = '' }) {
 function Star({ delay = 0, position = 'top-left' }) {
   return (
     <motion.svg
-      className="absolute w-8 h-8 text-yellow-300"
+      className="hidden sm:block absolute w-6 sm:w-8 text-yellow-300"
       viewBox="0 0 24 24"
       fill="currentColor"
       initial={{ opacity: 0, scale: 0 }}
@@ -260,7 +260,7 @@ export default function GenderRevealSection() {
         transition={{ duration: 0.7 }}
         className="mb-1"
       >
-        <h2 className="font-heading text-4xl sm:text-5xl font-bold mb-2">
+        <h2 className="font-heading text-2xl sm:text-4xl md:text-5xl font-bold mb-2">
           Am I a <span className="text-blue-600">BOY</span> or a <span className="text-pink-600">GIRL</span>?
         </h2>
         <div className="h-1 w-24 mx-auto rounded-full bg-gradient-to-r from-pink-400 to-blue-400" />
@@ -268,7 +268,7 @@ export default function GenderRevealSection() {
 
       {/* Subtitle */}
       <motion.p
-        className="font-body text-base sm:text-lg text-gray-600 mb-8 max-w-xl leading-relaxed"
+        className="font-body text-sm sm:text-base md:text-lg text-gray-600 mb-6 max-w-xl leading-relaxed px-4"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
@@ -279,7 +279,7 @@ export default function GenderRevealSection() {
       </motion.p>
 
       {/* Main Content Area */}
-      <div className="relative w-full max-w-2xl">
+      <div className="relative w-full max-w-2xl px-4 sm:px-6">
         {/* Teddy Bears - Left and Right */}
         <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-8 hidden lg:block">
           <motion.div
@@ -304,14 +304,14 @@ export default function GenderRevealSection() {
         </div>
 
         {/* Teddy Bears for Mobile */}
-        <div className="flex justify-center gap-6 mb-8 lg:hidden">
+        <div className="flex justify-center gap-4 mb-6 lg:hidden">
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
           >
-            <PinkTeddyBear className="w-20 h-20 sm:w-28 sm:h-28" />
+            <PinkTeddyBear className="w-16 h-16 sm:w-24 sm:h-24" />
           </motion.div>
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
@@ -319,12 +319,12 @@ export default function GenderRevealSection() {
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
           >
-            <BlueTeddyBear className="w-20 h-20 sm:w-28 sm:h-28" />
+            <BlueTeddyBear className="w-16 h-16 sm:w-24 sm:h-24" />
           </motion.div>
         </div>
 
         {/* Gift Box and Reveal Card */}
-        <div className="relative flex items-center justify-center min-h-[320px]">
+        <div className="relative flex items-center justify-center min-h-[280px] sm:min-h-[320px]">
           {/* Decorative balloons */}
           <motion.div
             className="absolute -left-20 -top-10 hidden md:block"
@@ -357,7 +357,7 @@ export default function GenderRevealSection() {
                 transition={{ duration: 0.5, type: 'spring' }}
               >
                 <div className="relative">
-                  <GradientGiftBox className="w-56 h-56 sm:w-72 sm:h-72 drop-shadow-2xl" />
+                  <GradientGiftBox className="w-40 h-40 sm:w-56 sm:h-56 md:w-72 md:h-72 drop-shadow-2xl" />
                   <motion.div
                     className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/20 to-transparent"
                     animate={{ opacity: [0.3, 0.6, 0.3] }}
@@ -365,7 +365,7 @@ export default function GenderRevealSection() {
                   />
                 </div>
                 <motion.p
-                  className="font-heading text-2xl sm:text-3xl font-bold text-pink-600 mt-4 drop-shadow-sm"
+                  className="font-heading text-lg sm:text-2xl md:text-3xl font-bold text-pink-600 mt-2 sm:mt-4 drop-shadow-sm"
                   animate={{ y: [0, 3, 0] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 >
@@ -378,7 +378,7 @@ export default function GenderRevealSection() {
                 initial={{ opacity: 0, scale: 0.5, rotateY: -90 }}
                 animate={{ opacity: 1, scale: 1, rotateY: 0 }}
                 transition={{ type: 'spring', stiffness: 150, damping: 15 }}
-                className={`w-full max-w-md invite-card bg-gradient-to-br ${revealColorClasses} rounded-3xl px-8 sm:px-12 py-12 sm:py-16 shadow-2xl border-4 ${borderColor}`}
+                className={`w-full max-w-md invite-card bg-gradient-to-br ${revealColorClasses} rounded-3xl px-6 sm:px-8 md:px-12 py-8 sm:py-12 md:py-16 shadow-2xl border-4 ${borderColor}`}
               >
                 {/* Decorative corner elements */}
                 <div className="absolute top-4 left-4 w-2 h-2 rounded-full opacity-60" style={{ backgroundColor: accentColor }} />
@@ -390,15 +390,15 @@ export default function GenderRevealSection() {
                   initial={{ scale: 0.8, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ delay: 0.15, duration: 0.5 }}
-                  className="mb-4"
+                  className="mb-3 sm:mb-4"
                 >
-                  <span className="text-5xl">
+                  <span className="text-3xl sm:text-5xl">
                     {status === 'boy' ? '👦' : status === 'girl' ? '👧' : '🎉'}
                   </span>
                 </motion.div>
 
                 <motion.p
-                  className="font-heading text-4xl sm:text-6xl font-bold leading-tight"
+                  className="font-heading text-2xl sm:text-4xl md:text-6xl font-bold leading-tight"
                   style={{ color: accentColor }}
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
@@ -438,6 +438,31 @@ export default function GenderRevealSection() {
           </AnimatePresence>
         </div>
       </div>
+
+      {/* Bottom decorative elements */}
+      <motion.div
+        className="mt-6 sm:mt-8 flex justify-center gap-3 sm:gap-4 text-2xl sm:text-3xl"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.6, duration: 0.7 }}
+      >
+        <motion.span animate={{ y: [0, -8, 0] }} transition={{ duration: 2, repeat: Infinity }}>
+          🎈
+        </motion.span>
+        <motion.span
+          animate={{ y: [0, -8, 0] }}
+          transition={{ duration: 2, repeat: Infinity, delay: 0.2 }}
+        >
+          🎉
+        </motion.span>
+        <motion.span
+          animate={{ y: [0, -8, 0] }}
+          transition={{ duration: 2, repeat: Infinity, delay: 0.4 }}
+        >
+          🎈
+        </motion.span>
+      </motion.div>
     </SectionContainer>
   )
 }
