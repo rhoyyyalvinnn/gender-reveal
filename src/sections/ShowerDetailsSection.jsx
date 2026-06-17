@@ -39,7 +39,7 @@ export default function ShowerDetailsSection() {
         Mark your calendars — we can't wait to celebrate with you!
       </p>
 
-      {/* 2×2 detail cards — always 2 columns */}
+      {/* 2×2 detail cards — equal height on all sizes */}
       <div className="grid grid-cols-2 gap-3 sm:gap-6 max-w-2xl mx-auto w-full px-3 sm:px-0">
         {cards.map((card, i) => (
           <motion.div
@@ -49,15 +49,20 @@ export default function ShowerDetailsSection() {
             viewport={{ once: true }}
             transition={{ delay: i * 0.15, duration: 0.6, ease: 'easeOut' }}
             whileHover={{ y: -4, scale: 1.02 }}
-            className="invite-card p-3 sm:p-6 flex flex-col items-center text-center shadow-lg"
+            className="invite-card h-full min-h-[160px] sm:min-h-[200px] p-4 sm:p-6 flex flex-col items-center justify-start text-center shadow-lg"
           >
-            <div className={`${card.color} rounded-full p-2.5 sm:p-4 mb-2 sm:mb-3 animate-floatYSlow`}>
-              <card.icon className="w-5 h-5 sm:w-7 sm:h-7 text-[#5B4B66]" aria-hidden="true" />
+            {/* Icon container with fixed size to prevent overflow */}
+            <div className={`${card.color} rounded-full p-2 sm:p-4 mb-2 sm:mb-3 flex-shrink-0 flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 animate-floatYSlow`}>
+              <card.icon className="w-5 h-5 sm:w-6 sm:h-6 text-[#5B4B66] flex-shrink-0" aria-hidden="true" />
             </div>
-            <p className="font-heading text-[10px] sm:text-sm uppercase tracking-widest text-soft-pink-deep mb-0.5 sm:mb-1">
+
+            {/* Label */}
+            <p className="font-heading text-[9px] sm:text-xs uppercase tracking-widest text-soft-pink-deep mb-1 sm:mb-2 flex-shrink-0">
               {card.label}
             </p>
-            <p className="font-body text-sm sm:text-lg text-[#5B4B66] font-semibold leading-snug">
+
+            {/* Value - grows to fill available space */}
+            <p className="font-body text-xs sm:text-base text-[#5B4B66] font-semibold leading-snug break-words">
               {card.value}
             </p>
           </motion.div>
