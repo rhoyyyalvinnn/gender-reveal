@@ -78,29 +78,82 @@ function BlueTeddyBear({ className = '' }) {
 }
 
 /**
- * Baby Onesie SVG — color configurable
+ * Logo/Seal Badge Icon — with large prominent t-shirt graphic, no text
  */
 function OnesieIcon({ fill, stroke, label, className = '' }) {
   return (
     <svg className={className} viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M60 40 L30 80 L60 85 L60 160 L140 160 L140 85 L170 80 L140 40 Q120 55 100 55 Q80 55 60 40Z"
+      {/* Outer seal circle */}
+      <circle
+        cx="100"
+        cy="100"
+        r="95"
         fill={fill}
         stroke={stroke}
         strokeWidth="4"
-        strokeLinejoin="round"
       />
-      <text
-        x="100"
-        y="125"
-        fontSize="28"
-        textAnchor="middle"
+
+      {/* Inner circle border for seal effect */}
+      <circle
+        cx="100"
+        cy="100"
+        r="85"
+        fill="none"
+        stroke={stroke}
+        strokeWidth="2"
+        opacity="0.6"
+      />
+
+      {/* Decorative dots around the seal */}
+      <circle cx="100" cy="18" r="4" fill={stroke} opacity="0.8" />
+      <circle cx="150" cy="35" r="4" fill={stroke} opacity="0.8" />
+      <circle cx="182" cy="100" r="4" fill={stroke} opacity="0.8" />
+      <circle cx="165" cy="165" r="4" fill={stroke} opacity="0.8" />
+      <circle cx="100" cy="182" r="4" fill={stroke} opacity="0.8" />
+      <circle cx="35" cy="165" r="4" fill={stroke} opacity="0.8" />
+      <circle cx="18" cy="100" r="4" fill={stroke} opacity="0.8" />
+      <circle cx="35" cy="35" r="4" fill={stroke} opacity="0.8" />
+
+      {/* Large T-Shirt Design */}
+      {/* Left sleeve */}
+      <path
+        d="M 45 65 Q 35 70 40 85 L 60 80 Q 65 70 65 60 Z"
         fill={stroke}
-        fontWeight="900"
-        fontFamily="inherit"
-      >
-        {label}
-      </text>
+        opacity="0.85"
+      />
+
+      {/* Right sleeve */}
+      <path
+        d="M 155 65 Q 165 70 160 85 L 140 80 Q 135 70 135 60 Z"
+        fill={stroke}
+        opacity="0.85"
+      />
+
+      {/* Main shirt body */}
+      <path
+        d="M 60 80 L 60 155 Q 60 165 70 165 L 130 165 Q 140 165 140 155 L 140 80 C 140 65 125 55 100 55 C 75 55 60 65 60 80 Z"
+        fill={stroke}
+        opacity="0.85"
+      />
+
+      {/* Shirt neckline - circle */}
+      <circle
+        cx="100"
+        cy="62"
+        r="14"
+        fill={fill}
+        stroke={stroke}
+        strokeWidth="2"
+        opacity="0.9"
+      />
+
+      {/* Neck opening - small circle in center */}
+      <circle
+        cx="100"
+        cy="62"
+        r="6"
+        fill={fill}
+      />
     </svg>
   )
 }
@@ -220,7 +273,7 @@ export default function AttireSection() {
             fill="#f9c0d5"
             stroke={pinkAccent}
             label="GIRL"
-            className="w-10 h-10 sm:w-14 sm:h-14"
+            className="w-20 h-20 sm:w-24 sm:h-24"
           />
         </motion.div>
 
@@ -259,7 +312,7 @@ export default function AttireSection() {
             fill="#bfdbfe"
             stroke={blueAccent}
             label="BOY"
-            className="w-10 h-10 sm:w-14 sm:h-14"
+            className="w-20 h-20 sm:w-24 sm:h-24"
           />
         </motion.div>
       </div>
