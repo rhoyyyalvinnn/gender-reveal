@@ -16,9 +16,9 @@ const RSVP_COLLECTION = 'rsvps'
  * Document shape:
  * {
  *   fullName: string,
- *   email: string,
  *   phoneNumber: string,
  *   guestCount: number,
+ *   guestNames: string[],
  *   attendance: string,
  *   message: string,
  *   submittedAt: timestamp
@@ -30,16 +30,20 @@ const RSVP_COLLECTION = 'rsvps'
  */
 export async function submitRsvp(data) {
   try {
+    const isAttending = data.attendance === 'Happily Attending'
+
     const docRef = await addDoc(collection(db, RSVP_COLLECTION), {
-      fullName: data.fullName.trim(),
-      email: data.email.trim().toLowerCase(),
-      phoneNumber: data.phoneNumber.trim(),
-      guestCount:
-        data.attendance === 'Happily Attending' ? Number(data.guestCount) : 0,
+      fullName: data.fullName?.trim() ?? '',
+      phoneNumber: data.phoneNumber?.trim() ?? '',
       attendance: data.attendance,
+      guestCount: isAttending ? Number(data.guestCount) : 0,
+      guestNames: isAttending
+        ? (data.guestNames ?? []).map((n) => (n ?? '').trim()).filter(Boolean)
+        : [],
       message: data.message ? data.message.trim() : '',
       submittedAt: serverTimestamp(),
     })
+
     return docRef.id
   } catch (error) {
     console.error('Error submitting RSVP:', error)
