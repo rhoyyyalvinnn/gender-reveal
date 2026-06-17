@@ -8,6 +8,7 @@ import { eventConfig } from '../utils/eventConfig.js'
  * SLIDE 8 — Countdown Timer
  * A live countdown to the event with smoothly "flipping" digit cards,
  * set against a starry night sky with a glowing moon.
+ * Mobile responsive with optimized layout.
  */
 export default function CountdownSection() {
   const { days, hours, minutes, seconds, isPast } = useCountdown(eventConfig.eventDateTime)
@@ -23,23 +24,36 @@ export default function CountdownSection() {
     <SectionContainer
       id="countdown"
       background={
-        <FloatingBackground layers={['stars', 'moon', 'stars', 'moon', 'hearts', 'hearts']} gradient="from-lavender via-baby-blue to-cream" />
+        <FloatingBackground layers={['stars', 'moon', 'stars', 'moon', 'hearts', 'hearts', 'balloons']} gradient="from-lavender via-baby-blue to-cream" />
       }
-      className="text-center flex flex-col items-center justify-center"
+      className="text-center flex flex-col items-center justify-center py-6 sm:py-8"
     >
-      <h2 className="font-heading text-4xl sm:text-5xl font-bold gradient-text mb-3">
-        {isPast ? "It's Almost Time!" : 'Counting Down To The Big Day'}
+      <h2 className="font-heading text-2xl sm:text-4xl lg:text-5xl font-bold gradient-text mb-2 sm:mb-3">
+        {isPast ? "It's Almost Time!" : 'Counting Down'}
       </h2>
-      <p className="font-body text-lg text-[#5B4B66] mb-10">
+      <p className="font-body text-sm sm:text-base lg:text-lg text-[#5B4B66] mb-6 sm:mb-8 px-2">
         {isPast
           ? 'We hope to see you there!'
-          : "Mark your calendars — every second brings us closer!"}
+          : "Every second brings us closer!"}
       </p>
 
-      <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
-        {units.map((unit) => (
-          <FlipCard key={unit.label} value={unit.value} label={unit.label} />
-        ))}
+      {/* Mobile: 3-1 grid, Desktop: flex single row */}
+      <div className="w-full max-w-4xl mx-auto px-2">
+        {/* Mobile layout: 3 cols + centered second row */}
+        <div className="lg:hidden grid grid-cols-3 gap-2 sm:gap-3 justify-items-center">
+          {units.map((unit, index) => (
+            <div key={unit.label} className={index === 3 ? 'col-start-2 col-span-1' : ''}>
+              <FlipCard value={unit.value} label={unit.label} />
+            </div>
+          ))}
+        </div>
+
+        {/* Desktop layout: flex single row */}
+        <div className="hidden lg:flex flex-wrap items-center justify-center gap-4 lg:gap-6">
+          {units.map((unit) => (
+            <FlipCard key={unit.label} value={unit.value} label={unit.label} />
+          ))}
+        </div>
       </div>
     </SectionContainer>
   )
@@ -50,7 +64,7 @@ function FlipCard({ value, label }) {
 
   return (
     <div className="flex flex-col items-center">
-      <div className="relative invite-card w-20 h-24 sm:w-28 sm:h-32 flex items-center justify-center overflow-hidden shadow-2xl">
+      <div className="relative invite-card w-16 h-20 sm:w-20 sm:h-24 lg:w-28 lg:h-32 flex items-center justify-center overflow-hidden shadow-lg">
         <AnimatePresence mode="popLayout">
           <motion.span
             key={display}
@@ -58,7 +72,7 @@ function FlipCard({ value, label }) {
             animate={{ y: 0, opacity: 1, rotateX: 0 }}
             exit={{ y: 40, opacity: 0, rotateX: -90 }}
             transition={{ duration: 0.5, ease: 'easeOut' }}
-            className="font-heading text-3xl sm:text-5xl font-bold text-soft-pink-deep"
+            className="font-heading text-2xl sm:text-3xl lg:text-5xl font-bold text-soft-pink-deep"
           >
             {display}
           </motion.span>
@@ -66,7 +80,9 @@ function FlipCard({ value, label }) {
         {/* Center divider line for a "flip clock" feel */}
         <div className="absolute left-0 right-0 top-1/2 h-px bg-[#5B4B66]/10" />
       </div>
-      <p className="mt-2 font-body text-sm uppercase tracking-widest text-[#5B4B66]">{label}</p>
+      <p className="mt-1.5 sm:mt-2 font-body text-xs sm:text-sm uppercase tracking-widest text-[#5B4B66]">
+        {label}
+      </p>
     </div>
   )
 }

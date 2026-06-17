@@ -80,7 +80,7 @@ function BlueTeddyBear({ className = '' }) {
 /**
  * Logo/Seal Badge Icon — with large prominent t-shirt graphic, no text
  */
-function OnesieIcon({ fill, stroke, label, className = '' }) {
+function OnesieIcon({ fill, stroke, className = '' }) {
   return (
     <svg className={className} viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
       {/* Outer seal circle */}
@@ -159,16 +159,19 @@ function OnesieIcon({ fill, stroke, label, className = '' }) {
 }
 
 /**
- * Individual "BABY" letter badges
+ * Individual "BABY" letter badges with unique keys
  */
 function BabyBadge({ color }) {
   return (
     <div className="flex gap-0.5">
-      {['B', 'A', 'B', 'Y'].map((letter) => (
+      {['B', 'A', 'B', 'Y'].map((letter, index) => (
         <span
-          key={letter}
+          key={`baby-letter-${index}`}
           className="inline-flex items-center justify-center w-4 h-4 rounded text-white font-black"
-          style={{ backgroundColor: color, fontSize: '9px' }}
+          style={{
+            backgroundColor: color,
+            fontSize: '9px',
+          }}
         >
           {letter}
         </span>
@@ -272,7 +275,6 @@ export default function AttireSection() {
           <OnesieIcon
             fill="#f9c0d5"
             stroke={pinkAccent}
-            label="GIRL"
             className="w-20 h-20 sm:w-24 sm:h-24"
           />
         </motion.div>
@@ -311,7 +313,6 @@ export default function AttireSection() {
           <OnesieIcon
             fill="#bfdbfe"
             stroke={blueAccent}
-            label="BOY"
             className="w-20 h-20 sm:w-24 sm:h-24"
           />
         </motion.div>
