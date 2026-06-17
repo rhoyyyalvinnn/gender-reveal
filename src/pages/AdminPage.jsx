@@ -1,17 +1,13 @@
 import { useEffect, useMemo, useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { Search, Download, RefreshCw, ArrowLeft } from 'lucide-react'
+import { Search, Download, RefreshCw, ArrowLeft, ChevronDown, ChevronUp } from 'lucide-react'
 import { getAllRsvps } from '../firebase/rsvpService.js'
 import { exportRsvpsToCsv } from '../utils/csvExport.js'
 
 /**
- * /admin — Optional dashboard for the hosts to review RSVP responses.
- *
- * NOTE: By default, Firestore security rules block reads from this
- * collection (see firestore.rules). To use this page, update the rules
- * to allow reads for authenticated admins (recommended) or, for a quick
- * start, allow public reads and keep this URL private.
+ * /admin — Dashboard for hosts to review RSVP responses.
+ * Updated to match new RSVP shape: no email, guestNames array instead.
  */
 export default function AdminPage() {
   const [rsvps, setRsvps] = useState([])
@@ -19,11 +15,13 @@ export default function AdminPage() {
   const [error, setError] = useState('')
   const [search, setSearch] = useState('')
   const [modalMessage, setModalMessage] = useState(null)
+  const [expandedRow, setExpandedRow] = useState(null)
+
   const openModal = (msg) => setModalMessage(msg)
   const closeModal = () => setModalMessage(null)
   const TRUNCATE_LENGTH = 40
   const truncate = (text, n = TRUNCATE_LENGTH) =>
-    (text && text.length > n ? text.slice(0, n) + '...' : text)
+    text && text.length > n ? text.slice(0, n) + '...' : text
 
   const loadData = async () => {
     setLoading(true)
@@ -45,16 +43,15 @@ export default function AdminPage() {
   const filtered = useMemo(() => {
     const term = search.trim().toLowerCase()
     if (!term) return rsvps
-    return rsvps.filter((r) =>
-      [r.fullName, r.email, r.phoneNumber, r.message]
-        .filter(Boolean)
-        .some((field) => field.toLowerCase().includes(term))
-    )
+    return rsvps.filter((r) => {
+      const fields = [r.fullName, r.phoneNumber, r.message, ...(r.guestNames ?? [])]
+      return fields.filter(Boolean).some((f) => f.toLowerCase().includes(term))
+    })
   }, [rsvps, search])
 
   const stats = useMemo(() => {
     const attending = rsvps.filter((r) => r.attendance === 'Happily Attending')
-    const declined = rsvps.filter((r) => r.attendance === "Sorry, Can't Attend")
+    const declined = rsvps.filter((r) => r.attendance === "Sorry, I Can't Attend")
     const totalGuests = attending.reduce((sum, r) => sum + (Number(r.guestCount) || 0), 0)
     return {
       totalResponses: rsvps.length,
@@ -67,6 +64,7 @@ export default function AdminPage() {
   return (
     <div className="min-h-screen bg-cream font-body text-[#5B4B66] p-4 sm:p-8">
       <div className="max-w-5xl mx-auto">
+        {/* Header */}
         <div className="flex items-center justify-between mb-6">
           <Link
             to="/"
@@ -100,12 +98,15 @@ export default function AdminPage() {
         {/* Controls */}
         <div className="flex flex-col sm:flex-row gap-3 mb-4">
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#5B4B66]/50" aria-hidden="true" />
+            <Search
+              className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#5B4B66]/50"
+              aria-hidden="true"
+            />
             <input
               type="search"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search by name, email, phone, or message..."
+              placeholder="Search by name, phone, guest, or message..."
               aria-label="Search RSVPs"
               className="w-full rounded-full border-2 border-cream bg-white px-10 py-2 focus:border-soft-pink-deep focus:outline-none"
             />
@@ -121,18 +122,18 @@ export default function AdminPage() {
           </button>
         </div>
 
-        {/* Table */}
+        {/* Error */}
         {error && (
           <div className="invite-card p-4 mb-4 text-red-600 text-sm" role="alert">
             {error}
             <p className="mt-2 text-[#5B4B66]/80">
-              If this is your first time here, check that your Firestore security rules allow
-              the admin dashboard to read the <code>rsvps</code> collection (see{' '}
-              <code>firestore.rules</code>).
+              Check that your Firestore security rules allow the admin dashboard to read the{' '}
+              <code>rsvps</code> collection (see <code>firestore.rules</code>).
             </p>
           </div>
         )}
 
+        {/* Table */}
         {loading ? (
           <p className="text-center py-10">Loading RSVPs...</p>
         ) : filtered.length === 0 ? (
@@ -143,55 +144,129 @@ export default function AdminPage() {
               <thead>
                 <tr className="bg-soft-pink/40">
                   <Th>Name</Th>
-                  <Th>Email</Th>
                   <Th>Phone</Th>
-                  <Th>Guests</Th>
                   <Th className="whitespace-nowrap">Status</Th>
+                  <Th>Guests</Th>
                   <Th>Message</Th>
                   <Th>Submitted</Th>
                 </tr>
               </thead>
               <tbody>
-                {filtered.map((r, i) => (
-                  <motion.tr
-                    key={r.id}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: i * 0.02 }}
-                    className="border-b border-cream last:border-0"
-                  >
-                    <Td className="whitespace-nowrap">{r.fullName}</Td>
-                    <Td>{r.email}</Td>
-                    <Td>{r.phoneNumber}</Td>
-                    <Td>{r.guestCount ?? 0}</Td>
-                    <Td className="whitespace-nowrap">
-                      <span
-                        className={`inline-block whitespace-nowrap px-2 py-1 rounded-full text-xs font-semibold ${
-                          r.attendance === 'Happily Attending'
-                            ? 'bg-baby-blue/40 text-baby-blue-deep'
-                            : 'bg-soft-pink/40 text-soft-pink-deep'
-                        }`}
+                {filtered.map((r, i) => {
+                  const isExpanded = expandedRow === r.id
+                  const hasGuests = r.guestNames && r.guestNames.length > 0
+
+                  return (
+                    <>
+                      <motion.tr
+                        key={r.id}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: i * 0.02 }}
+                        className="border-b border-cream last:border-0"
                       >
-                        {r.attendance}
-                      </span>
-                    </Td>
-                    <Td className="max-w-[10rem]">
-                      {r.message ? (
-                        <button
-                          type="button"
-                          onClick={() => openModal(r.message)}
-                          className="text-left w-full truncate text-sm leading-tight hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-baby-blue rounded"
-                          aria-label={`View full message from ${r.fullName}`}
-                        >
-                          {truncate(r.message)}
-                        </button>
-                      ) : (
-                        '—'
-                      )}
-                    </Td>
-                    <Td className="whitespace-nowrap">{formatDate(r.submittedAt)}</Td>
-                  </motion.tr>
-                ))}
+                        {/* Name */}
+                        <Td className="whitespace-nowrap font-semibold">{r.fullName}</Td>
+
+                        {/* Phone */}
+                        <Td className="whitespace-nowrap">{r.phoneNumber || '—'}</Td>
+
+                        {/* Status badge */}
+                        <Td className="whitespace-nowrap">
+                          <span
+                            className={`inline-block whitespace-nowrap px-2 py-1 rounded-full text-xs font-semibold ${
+                              r.attendance === 'Happily Attending'
+                                ? 'bg-baby-blue/40 text-baby-blue-deep'
+                                : 'bg-soft-pink/40 text-soft-pink-deep'
+                            }`}
+                          >
+                            {r.attendance}
+                          </span>
+                        </Td>
+
+                        {/* Guest count + expand toggle */}
+                        <Td>
+                          {r.attendance === 'Happily Attending' ? (
+                            <button
+                              type="button"
+                              onClick={() => setExpandedRow(isExpanded ? null : r.id)}
+                              disabled={!hasGuests}
+                              className="inline-flex items-center gap-1 text-baby-blue-deep hover:underline disabled:no-underline disabled:cursor-default focus-visible:outline focus-visible:outline-2 focus-visible:outline-baby-blue rounded"
+                              aria-label={
+                                isExpanded
+                                  ? `Collapse guest list for ${r.fullName}`
+                                  : `Expand guest list for ${r.fullName}`
+                              }
+                              aria-expanded={isExpanded}
+                            >
+                              <span className="font-semibold">{r.guestCount ?? 0}</span>
+                              {hasGuests && (
+                                isExpanded
+                                  ? <ChevronUp className="w-3 h-3" />
+                                  : <ChevronDown className="w-3 h-3" />
+                              )}
+                            </button>
+                          ) : (
+                            <span className="text-[#5B4B66]/40">—</span>
+                          )}
+                        </Td>
+
+                        {/* Message */}
+                        <Td className="max-w-[10rem]">
+                          {r.message ? (
+                            <button
+                              type="button"
+                              onClick={() => openModal(r.message)}
+                              className="text-left w-full truncate text-sm leading-tight hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-baby-blue rounded"
+                              aria-label={`View full message from ${r.fullName}`}
+                            >
+                              {truncate(r.message)}
+                            </button>
+                          ) : (
+                            '—'
+                          )}
+                        </Td>
+
+                        {/* Date */}
+                        <Td className="whitespace-nowrap text-xs text-[#5B4B66]/70">
+                          {formatDate(r.submittedAt)}
+                        </Td>
+                      </motion.tr>
+
+                      {/* Expandable guest names row */}
+                      <AnimatePresence>
+                        {isExpanded && hasGuests && (
+                          <motion.tr
+                            key={`${r.id}-guests`}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.2 }}
+                          >
+                            <td colSpan={6} className="px-4 pb-4 pt-0 bg-baby-blue/10">
+                              <div className="rounded-2xl bg-white/60 p-3 space-y-1">
+                                <p className="font-heading text-xs uppercase tracking-widest text-baby-blue-deep mb-2">
+                                  Guest Names
+                                </p>
+                                {r.guestNames.map((name, idx) => (
+                                  <div
+                                    key={idx}
+                                    className="flex items-center gap-2 text-xs sm:text-sm font-body text-[#5B4B66]"
+                                  >
+                                    <span className="text-[#5B4B66]/50 w-20 shrink-0">
+                                      {idx === 0 ? 'Guest 1 (Host)' : `Guest ${idx + 1}`}
+                                    </span>
+                                    <span className="font-semibold">{name || '—'}</span>
+                                  </div>
+                                ))}
+                              </div>
+                            </td>
+                          </motion.tr>
+                        )}
+                      </AnimatePresence>
+                    </>
+                  )
+                })}
               </tbody>
             </table>
           </div>
@@ -199,7 +274,11 @@ export default function AdminPage() {
 
         {/* Full message modal */}
         {modalMessage && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true">
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            role="dialog"
+            aria-modal="true"
+          >
             <div className="fixed inset-0 bg-black/40" onClick={closeModal} />
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 10 }}
@@ -216,7 +295,9 @@ export default function AdminPage() {
                 ✕
               </button>
               <h2 className="font-heading text-xl gradient-text font-bold mb-3">Message</h2>
-              <p className="whitespace-pre-wrap text-sm sm:text-base text-[#5B4B66]">{modalMessage}</p>
+              <p className="whitespace-pre-wrap text-sm sm:text-base text-[#5B4B66]">
+                {modalMessage}
+              </p>
             </motion.div>
           </div>
         )}
@@ -235,7 +316,9 @@ function StatCard({ label, value, color }) {
 }
 
 function Th({ children, className = '' }) {
-  return <th className={`px-4 py-3 font-heading whitespace-nowrap ${className}`}>{children}</th>
+  return (
+    <th className={`px-4 py-3 font-heading whitespace-nowrap ${className}`}>{children}</th>
+  )
 }
 
 function Td({ children, className = '', ...props }) {
@@ -248,7 +331,8 @@ function Td({ children, className = '', ...props }) {
 
 function formatDate(timestamp) {
   if (!timestamp) return '—'
-  const date = typeof timestamp?.toDate === 'function' ? timestamp.toDate() : new Date(timestamp)
+  const date =
+    typeof timestamp?.toDate === 'function' ? timestamp.toDate() : new Date(timestamp)
   if (Number.isNaN(date.getTime())) return '—'
   return date.toLocaleString()
 }
