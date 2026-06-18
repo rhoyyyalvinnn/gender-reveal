@@ -42,7 +42,7 @@ export const eventConfig = {
   },
 
   // ISO date-time used for the live countdown timer
-  eventDateTime: '2026-07-18T13:00:00',
+  eventDateTime: '2026-07-18T16:00:00',
 
   // ---- Attire Guide ----
   attire: {

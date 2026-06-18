@@ -2,6 +2,9 @@ import {
   collection,
   addDoc,
   getDocs,
+  doc,
+  deleteDoc,
+  updateDoc,
   query,
   orderBy,
   serverTimestamp,
@@ -68,5 +71,43 @@ export async function getAllRsvps() {
   } catch (error) {
     console.error('Error fetching RSVPs:', error)
     throw new Error('Unable to load RSVPs right now. Please try again later.')
+  }
+}
+
+/**
+ * Permanently deletes an RSVP document (and, implicitly, all of its
+ * accompanying guest names, since they live inside the same document).
+ *
+ * @param {string} rsvpId
+ * @returns {Promise<void>}
+ * @throws Will throw if the Firestore delete fails
+ */
+export async function deleteRsvp(rsvpId) {
+  try {
+    await deleteDoc(doc(db, RSVP_COLLECTION, rsvpId))
+  } catch (error) {
+    console.error('Error deleting RSVP:', error)
+    throw new Error('Unable to delete this RSVP right now. Please try again.')
+  }
+}
+
+/**
+ * Removes one or more accompanying guests from an RSVP's guestNames array
+ * without deleting the RSVP itself. Recalculates guestCount to match.
+ *
+ * @param {string} rsvpId
+ * @param {string[]} updatedGuestNames - the full guestNames array after removal
+ * @returns {Promise<void>}
+ * @throws Will throw if the Firestore update fails
+ */
+export async function removeGuestsFromRsvp(rsvpId, updatedGuestNames) {
+  try {
+    await updateDoc(doc(db, RSVP_COLLECTION, rsvpId), {
+      guestNames: updatedGuestNames,
+      guestCount: updatedGuestNames.length,
+    })
+  } catch (error) {
+    console.error('Error removing guest(s) from RSVP:', error)
+    throw new Error('Unable to update guests for this RSVP right now. Please try again.')
   }
 }

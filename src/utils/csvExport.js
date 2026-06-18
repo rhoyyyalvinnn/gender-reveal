@@ -10,7 +10,6 @@ export function exportRsvpsToCsv(rows, filename = 'rsvps.csv') {
 
   const headers = [
     'Full Name',
-    'Email',
     'Phone Number',
     'Guests',
     'Attendance',
@@ -40,7 +39,6 @@ export function exportRsvpsToCsv(rows, filename = 'rsvps.csv') {
     lines.push(
       [
         escapeCell(row.fullName),
-        escapeCell(row.email),
         escapeCell(row.phoneNumber),
         escapeCell(row.guestCount),
         escapeCell(row.attendance),
