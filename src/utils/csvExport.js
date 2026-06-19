@@ -1,4 +1,20 @@
 /**
+ * Safely turns whatever shape guestNames happens to be in (a clean array,
+ * a stringified list, null/undefined, or a single string) into a
+ * semicolon-separated string for the CSV, without throwing or silently
+ * returning an empty cell when data actually exists.
+ */
+function extractGuestNames(guestNames) {
+  if (Array.isArray(guestNames)) {
+    return guestNames.filter(Boolean).join('; ')
+  }
+  if (typeof guestNames === 'string' && guestNames.trim()) {
+    return guestNames.trim()
+  }
+  return ''
+}
+
+/**
  * Converts an array of RSVP objects into a downloadable CSV file
  * and triggers the browser download.
  *
@@ -12,6 +28,7 @@ export function exportRsvpsToCsv(rows, filename = 'rsvps.csv') {
     'Full Name',
     'Phone Number',
     'Guests',
+    'Guest Names',
     'Attendance',
     'Message',
     'Submitted At',
@@ -36,11 +53,14 @@ export function exportRsvpsToCsv(rows, filename = 'rsvps.csv') {
         ).toLocaleString()
       : ''
 
+    const guestNames = extractGuestNames(row.guestNames)
+
     lines.push(
       [
         escapeCell(row.fullName),
         escapeCell(row.phoneNumber),
         escapeCell(row.guestCount),
+        escapeCell(guestNames),
         escapeCell(row.attendance),
         escapeCell(row.message),
         escapeCell(submitted),
